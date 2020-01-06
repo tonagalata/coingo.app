@@ -1,0 +1,77 @@
+<%- include('../partials/header') %>
+
+<div id="page-container"> 
+<div class="member"><%= user.name %> Logged in</div>
+<!-- <h2>Stripe Checkout Example</h2>
+<div id="shop">
+  <button class="wave-light" id="buttonCheckout">Checkout</button>
+</div> -->
+
+ </div>
+  
+
+
+<%- include('../partials/footer') %>
+
+<!-- <html>
+  <head>
+    <title>Stripe Checkout Integration</title>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+  </head>
+  <body>
+    <h2>Stripe Checkout Example</h2>
+
+    <div id="shop">
+      <input type="number" id="charge_amount" name="amountCharged" required>
+      <button id="buttonCheckout">Checkout</button>
+    </div>
+  </body>
+
+  <script> -->
+<!-- //     var checkoutHandler = StripeCheckout.configure({
+//   key: "pk_test_bxWBtKKtZqxBNXPxKzE8BLU8001CMawzKx",
+//   locale: "auto"
+// });
+
+// let chargedAmount = document.getElementById('charge_amount');
+// let amount = chargedAmount.value
+
+// var button = document.getElementById("buttonCheckout");
+// button.addEventListener("click", function(ev) {
+//   checkoutHandler.open({
+//     name: "Tona Tech",
+//     description: "Funding Group Payment",
+//     token: handleToken
+//   });
+// });
+
+// function handleToken(token) {
+//   fetch("/charge", {
+//     method: "POST",
+//     headers: {"Content-Type": "application/json"},
+//     body: JSON.stringify(token)
+//   })
+//   .then(output => {
+//     if (output.status === "succeeded")
+//       document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
+//   })
+// }
+
+// fetch("/charge", {
+//   method: "POST",
+//   headers: {"Content-Type": "application/json"},
+//   body: JSON.stringify(token)
+// })
+// .then(response => {
+//   if (!response.ok)
+//     throw response;
+//   return response.json();
+// })
+// .then(output => {
+//   console.log("Purchase succeeded:", output);
+// })
+// .catch(err => {
+//   console.log("Purchase failed:", err);
+// }) -->
+<!--</script>-->
+<!-- </html> -->

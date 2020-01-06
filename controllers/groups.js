@@ -11,10 +11,26 @@ module.exports = {
 // }
 
 function index(req, res, next) {
+  console.log(req.params.id)
   Member.find({}, function(err, members){
-   res.render('admins/index', {
+   res.render('groups/index', {
     members,
-    user: req.user
+    user: req.user,
+    id: req.params.id
     });
  });
 }
+
+// function index(req, res, next) {
+//   Member.find({}, function(err, members){
+//    res.render('members/index', {
+//     members,
+//     user: req.user
+//     });
+//  });
+// }
+
+
+
+
+

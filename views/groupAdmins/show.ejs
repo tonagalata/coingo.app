@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Site Admin</title>
+  <title>Group Admin</title>
 </head>
 <body>
-  <% if (!user.siteAdmin) { %>
-    <h1>Welcome Site Admin</h1>
+  <% if (groupAdmin.name === true) { %>
+    <h1>Welcome Group Admin</h1>
     <% } else { %>
-      <h1>You are not Authorized an as Site Admin</h1>
+        <h1>You are not Authorized as Group Administrator</h1>
     <% } %>
 </body>
 </html>
