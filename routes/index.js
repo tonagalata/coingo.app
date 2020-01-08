@@ -20,7 +20,7 @@ router.get('/payments', membersCtrl.isLoggedIn, membersCtrl.makePayment)
 router.post("payments/charge", membersCtrl.isLoggedIn, membersCtrl.postPayment);
 
 //Get Groups
-router.get('/group/:id', membersCtrl.isLoggedIn, groupsCtrl.index);
+router.get('/group/:id', membersCtrl.isLoggedIn, groupsCtrl.index, membersCtrl.updateGroupMember);
 router.post('/group/:id', membersCtrl.isLoggedIn, membersCtrl.updateGroupMember);
 
 // GET members

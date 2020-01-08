@@ -1,27 +1,27 @@
 <%- include('../partials/header') %>
 <main class="group-main">
   <h5 class="center">Funding Group #<%= id %></h5>
-  <div>Funding Goals</div>
-  <div>$20,000.00</div>
+  <div class="funding-goal">
+    <label>Funding Goal:</label>
+      <div id="goal-amount">$20,000.00</div>
+  </div>
   <div>
-    <% if(user.groupMembers) { %>
+    <!--<div>Group Name: <%#= user.group[0].groupMembers %></div>-->
+    <!--<div>Group No: <%#= user.group[0].name %></div>-->
+    <% if(user.group) { %>
     <table>
       <thead>
-        <th>name</th>
-        <th>email</th>
-        <th>avatar</th>
-        <th>transaction ID</th>
-        <th>transaction Amount</th>
-        <th>group</th>
-        <th>groupAdmin</th>
-        <th>Admin</th>
-        <th>siteAdmin</th>
-        <th>googleId</th>
-        <th>facebookId</th>
-        <th>linkedinId</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Avatar</th>
+        <th>Transaction ID</th>
+        <th>Transaction Amount</th>
+        <th>Group Name</th>
+        <th>Group Members</th>
       </thead>
       <tbody>
-      <% members.forEach( us => {%>
+      <% if(user.length > 1 ) {%>
+      <% users.forEach( us => {%>
       <tr>
         <td><%= us.name %></td>
         <td><%= us.email %></td>
@@ -49,21 +49,59 @@
         <%}%>
         </td>
         <td><%= us.group.group %></td>
-        <td><%= us.groupAdmin %></td>
-        <td><%= us.Admin %></td>
-        <td><%= us.siteAdmin %></td>
-        <td><%= us.googleId %></td>
-        <td><%= us.facebookId %></td>
-        <td><%= us.linkedinId %></td>
       </tr>
       <%});%>
+      <%} else if (user) {%>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.avatar %></td>
+        <td>
+        <%if (user.transaction.length === 0) {%>
+          No Transactions
+        <%} else {%>
+          <ul>
+                <%user.transaction.forEach((pay, idx) => { %>
+              <li><%= pay._id  %></li>
+            <%})%>
+          </ul>
+        <%}%>
+        </td>
+        <td>
+        <%if (user.transaction.length === 0) {%>
+          No Transactions
+        <%} else {%>
+          <ul>
+                <%user.transaction.forEach((pay, idx) => { %>
+              <li><%=idx+1 +': $'+  pay.paymentAmount  %></li>
+            <%})%>
+          </ul>
+        <%}%>
+        </td>
+        <td>
+          <ul>
+        <%user.group.forEach((gr) => {%>
+          <li><%= gr.name %></li>
+        <%})%>
+      </ul>
+      </td>
+      <td>
+          <ul>
+        <%user.group.forEach((gr) => {%>
+          <li><%= gr.groupMembers %></li> 
+        <%})%>
+      </ul>
+      </td>
+      </tr>
+      <%}%>
     </tbody>
     </table>
     <%} else {%>
       This group does not have members
     <% }%>
   </div>
-  <div>
+  <div class="group-form">
+    <div class="center">Update Group Membership</div>
     <form action="/group/<%= id %>" method="POST">
       <input value="<%= user.name %>" name="groupMembers" required>
       <input placeholder="Group Name Here" name="name" required>

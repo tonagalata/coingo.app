@@ -19,13 +19,6 @@ module.exports = {
 };
 
 function updateGroupMember(req, res) {
-  res.render(`groups/index`, {
-    groupName: user.group.name,
-    id: req.params.id,
-    user: req.user,
-    name: req.body.name,
-    groupMembers: user.group.groupMembers[0]
-    })
   Member.findById(req.user.id, function(err, members){
       console.log(req.body)
       console.log(req.body.groupMembers)
