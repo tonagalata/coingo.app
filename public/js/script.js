@@ -11,7 +11,7 @@ $(document).ready(function() {
               $('#paymentBtn')[0].dataset.description = "Stripe Payment for " + "$" + (convertedAmount/100)
              })
 
-          $(':submit').on('click', function(event) {
+          $('#paymentBtn:submit').on('click', function(event) {
             
             event.preventDefault();
             // let charged = document.getElementById('paymentInput').value

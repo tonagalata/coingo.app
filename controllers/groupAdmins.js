@@ -12,14 +12,13 @@ module.exports = {
 //   });
 // }
 
-function index(req, res) {
+function index(req, res, next) {
   console.log(req.body)
-  Member.findById({_id}, function(err, members){
+  Member.find({}, function(err, members){
     res.render('groupAdmins/index', {
       members,
-      Authorized: members[0].groupAdmin,
       user: req.user
-      }); console.log(members[0].groupAdmin)
+      }); 
  });
 }
 

@@ -1,7 +1,74 @@
 <%- include('../partials/header') %>
-
-  <h1>Funding Group #<%= id %></h1>
-  <h2>Funding Goals</h2>
-  <h3>$20,000.00</h3>
-
+<main class="group-main">
+  <h5 class="center">Funding Group #<%= id %></h5>
+  <div>Funding Goals</div>
+  <div>$20,000.00</div>
+  <div>
+    <% if(user.groupMembers) { %>
+    <table>
+      <thead>
+        <th>name</th>
+        <th>email</th>
+        <th>avatar</th>
+        <th>transaction ID</th>
+        <th>transaction Amount</th>
+        <th>group</th>
+        <th>groupAdmin</th>
+        <th>Admin</th>
+        <th>siteAdmin</th>
+        <th>googleId</th>
+        <th>facebookId</th>
+        <th>linkedinId</th>
+      </thead>
+      <tbody>
+      <% members.forEach( us => {%>
+      <tr>
+        <td><%= us.name %></td>
+        <td><%= us.email %></td>
+        <td><%= us.avatar %></td>
+        <td>
+        <%if (us.transaction.length === 0) {%>
+          No Transactions
+        <%} else {%>
+          <ul>
+                <%us.transaction.forEach((pay, idx) => { %>
+              <li><%= pay._id  %></li>
+            <%})%>
+          </ul>
+        <%}%>
+        </td>
+        <td>
+        <%if (us.transaction.length === 0) {%>
+          No Transactions
+        <%} else {%>
+          <ul>
+                <%us.transaction.forEach((pay, idx) => { %>
+              <li><%=idx+1 +': $'+  pay.paymentAmount  %></li>
+            <%})%>
+          </ul>
+        <%}%>
+        </td>
+        <td><%= us.group.group %></td>
+        <td><%= us.groupAdmin %></td>
+        <td><%= us.Admin %></td>
+        <td><%= us.siteAdmin %></td>
+        <td><%= us.googleId %></td>
+        <td><%= us.facebookId %></td>
+        <td><%= us.linkedinId %></td>
+      </tr>
+      <%});%>
+    </tbody>
+    </table>
+    <%} else {%>
+      This group does not have members
+    <% }%>
+  </div>
+  <div>
+    <form action="/group/<%= id %>" method="POST">
+      <input value="<%= user.name %>" name="groupMembers" required>
+      <input placeholder="Group Name Here" name="name" required>
+      <button>Add to Group</button>
+    </form>  
+  </div>
+</main>
 <%- include('../partials/footer') %>

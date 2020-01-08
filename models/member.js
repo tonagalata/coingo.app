@@ -8,9 +8,12 @@ There is no model and no 'facts' collection
 const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema({
-  text: {
+  stripeToken: {
+    type: String
+  },
+  paymentAmount: {
     type: String,
-    required: true
+    default: 0
   },
 
 }, {
@@ -18,7 +21,7 @@ const transactionSchema = new Schema({
 });
 
 const groupSchema = new Schema({
-  name: { type: String, required: true},
+  name: { type: String},
   groupMembers: [{
     type: String
   }]
@@ -31,7 +34,7 @@ const memberSchema = new Schema({
   email: String,
   avatar: String,
   transaction: [transactionSchema],
-  group: [{groupSchema}],
+  group: [groupSchema],
   groupAdmin: {type: Boolean, default: false},
   Admin: {type: Schema.Types.ObjectId, ref: 'GroupAdmin'},
   siteAdmin: [{type: Schema.Types.ObjectId, ref: 'SiteAdmin'}],

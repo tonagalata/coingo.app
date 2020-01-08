@@ -1,12 +1,12 @@
 
 <%- include('../partials/header') %>
 
-<main>
+<main class="header">
   <div id="stripe-form">
 
-    <form action="." method="post">
+    <form action="/payments/charge" method="POST">
       <noscript>You must <a href="http://www.enable-javascript.com" target="_blank">enable JavaScript</a> in your web browser in order to pay via Stripe.</noscript>
-      <input id="paymentInput" type="number" placeholder="Enter Amount here" required min="100">
+      <input id="paymentInput" type="number" placeholder="Enter Amount here" name="paymentAmount" required min="100">
       <button
           id="paymentBtn"
           type="submit" 
@@ -17,58 +17,9 @@
           data-name="Funding Group <%= groupNo %>"
           data-description="Stripe Payment for $100.00"
           >Make a Payment</button>
-      <script>
-      </script>
 </form>
 
 
-    <!-- <input class="form-control"
-    type="number"
-    id="custom-donation-amount"
-    placeholder="50.00"
-    min="0"
-    step="10.00"/>
-    <script src="https://checkout.stripe.com/checkout.js"></script>
-    <button id="customButton" type="submit">Purchase</button>
-    <script>
-      var handler = StripeCheckout.configure({
-        key: 'pk_test_bxWBtKKtZqxBNXPxKzE8BLU8001CMawzKx',
-        image: '/square-image.png',
-        token: function(token) {
-          // Use the token to create the charge with a server-side script.
-          // You can access the token ID with `token.id`
-        }
-      });
-    
-      document.getElementById('customButton').addEventListener('click', function(e) {
-        // This line is the only real modification...
-        var amount = $("#custom-donation-amount").val() * 100;
-        handler.open({
-          name: 'Demo Site',
-          description: 'Some donation',
-          // ... aside from this line where we use the value.
-          amount: amount
-        });
-        e.preventDefault();
-      });
-    </script> -->
-
-    <!-- <form action="payments/charge" method="">
-      <article> -->
-        <!-- <input id="chargedAmount" type="number" name="payAmount" required placeholder="Enter Amount here...">
-        <label>Amount</label> -->
-
-        <!-- <button id="checkout-button">Pay</button>
-      </article>
-      <script src="https://js.stripe.com/v3"></script> -->
-      <!-- <script defer src="//checkout.stripe.com/v2/checkout.js"
-      class="stripe-button"
-      data-key="pk_test_bxWBtKKtZqxBNXPxKzE8BLU8001CMawzKx"
-      data-locale="auto"
-      data-description="Sample payment"
-      data-amount="500">
-      </script> -->
-    <!-- </form> -->
   </div>
 </main>
 

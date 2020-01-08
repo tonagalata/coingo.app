@@ -317,7 +317,7 @@ margin-bottom: 2%;
 }
 
 #nav-mobile {
-	position: fixed;
+	position: absolute;
 	right: 0;
 	top: 0;
 }
@@ -352,4 +352,39 @@ margin-bottom: 2%;
 
 #stripe-form form {
 	background-color: #f6f5f7;
+}
+
+.group-admin-header, .group-main {
+	margin-top: 100px;
+}
+
+.header {
+	margin-top: 100px;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+}
+
+.group-admin-main, .group-main  {
+	margin-bottom: 100px;
+}
+
+.all-users {
+	margin-top: 100px;
+}
+
+.avatar {
+	height: 50px;
+	border-radius: 50%;
+}
+
+#user-account {
+	font-size: 50px;
+}
+
+.transactions-list{
+	border: dashed .5px rgb(88, 87, 87);
+	margin: 0;
 }

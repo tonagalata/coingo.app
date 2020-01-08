@@ -6,7 +6,7 @@ const groupAdminCtrl = require('../controllers/groupAdmins');
 
 
 
-router.get('/admin', membersCtrl.isLoggedIn, groupAdminCtrl.index);
+router.get('/admin/:id/', membersCtrl.isLoggedIn, groupAdminCtrl.index);
 router.get('/admin/show', membersCtrl.isLoggedIn, groupAdminCtrl.show);
 // router.post('/tickets', ticketsCtrl.create);
 // router.post('/flights/:id/tickets', ticketsCtrl.addTicket);

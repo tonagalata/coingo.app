@@ -1,4 +1,10 @@
 const Member = require('../models/member');
+require('dotenv').config();
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+const stripe = require("stripe")(keySecret);
+
+
 
 module.exports = {
   index,
@@ -8,18 +14,32 @@ module.exports = {
   paymentCharges,
   makePayment,
   postPayment,
-  isLoggedIn
+  isLoggedIn,
+  updateGroupMember
 };
 
-// function index(req, res) {
-//   Student.find({}, function(err, students) {
-//     res.render('students/index', { students });
-//   });
-// }
+function updateGroupMember(req, res) {
+  res.render(`groups/index`, {
+    groupName: user.group.name,
+    id: req.params.id,
+    user: req.user,
+    name: req.body.name,
+    groupMembers: user.group.groupMembers[0]
+    })
+  Member.findById(req.user.id, function(err, members){
+      console.log(req.body)
+      console.log(req.body.groupMembers)
+      console.log(req.body.name)
+  members.group.push(req.body)
+  members.save((err) => {
+    if(err) res.redirect('/members')
+  }); console.log(members)
+})
+}
 
 function postPayment (req, res) {
     console.log(req.body)
-    let amount = 500;
+    let amount = req.body.paymentAmount;
     
     stripe.customers.create({
       email: req.body.stripeEmail,
@@ -32,7 +52,28 @@ function postPayment (req, res) {
         currency: "usd",
         customer: customer.id
       }))
-    .then(charge => res.render('payments/charge'))
+    .then((charge) => {
+      Member.findById(req.user.id, function(err, members){
+        res.render('payments/index', {
+          members,
+          user: req.user,
+          groupNo: req.user._id,
+          amount: charge.amount,
+          transactionId: charge.stripeToken
+          })
+      members.transaction.push(req.body)
+      members.save((err) => {
+      console.log(err)
+      });
+        });//console.log(charge.amount)
+  })
+  // .then(
+  //   Member.findById(req.user._id, function(err, members){
+  //     members.transaction.push(req.body)
+  //     members.save((err) => {
+  //       res.redirect('/payments');
+  //     });
+  //   }))
     .catch(err => {
       console.log("Error:", err);
       res.status(500).send({error: "Purchase Failed"});
@@ -43,20 +84,20 @@ function paymentCharges (req, res) {
   Member.find({}, function(err, members){
   res.render('payments/show', {
     members,
-    user: req.user
-    // ,amount: req.body.payAmount
+    user: req.user,
+    amount: req.body.payAmount
     })
   })
 }
 
 function makePayment (req, res) {
   Member.find({}, function(err, members){
-    console.log(req.body)
+    // console.log(req.body)
   res.render('payments/index', {
     members,
     user: req.user,
-    groupNo: 1
-    // ,amount: req.body.payAmount || 500
+    groupNo: req.user._id,
+    amount: req.body.payAmount || 1000
     })
   })
 }

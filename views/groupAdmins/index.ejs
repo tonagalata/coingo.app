@@ -1,16 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Group Admin</title>
-</head>
-<body>
-  <% if (Authorized === true) { %>
-    <h1>Welcome Group Admin</h1>
+<%- include('../partials/header') %>
+
+  <% if (user.groupAdmin === true) { %>
+    <main class="group-admin-main">
+    <h3 class="group-admin-header">Welcome <%=user.name%></h3>
+    <h5 class="center">Your Information</h5>
+    <table>
+      <thead>
+        <th></th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Groups</th>
+        <th>Num. of Transactions</th>
+        <th>Transactions</th>
+      </thead>
+      <tbody>
+        <tr>
+          <% if (user.avatar) {%>
+            <td><img class="avatar" src="<%= user.avatar %>" alt="<%= user.name  %>'s avatar"></td>
+            <% } else { %>
+              <td><i id="user-account" class="las la-user"></i></td>
+            <%}%>
+          <td><%= user.name  %></td>
+          <%if (!user.email) {%>
+          <td>No Email</td>
+          <% } else { %>
+            <td><%=user.email%></td>
+          <%}%>
+          <%if (user.group == 0 || !user.group) {%>  
+          <td>Has not joinned group</td> 
+          <% } else { %>
+          <td><%= user.group  %></td>
+          <%}%>
+          <td><%=user.transaction.length%></td>
+          <td class="transactions-list">
+            <%if (user.transaction.length === 0) {%>
+              No Transactions
+            <%} else {%>
+            <ul>
+          <%user.transaction.forEach((pay, idx) => { %>
+          <li><%=idx+1 +': $'+ pay.paymentAmount  %></li>
+          <%})%>
+        </ul class="transactions-list">
+        <%}%>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h5 class="all-users center">All Users Table</h5>
+    <table class="highlight">
+        <thead>
+          <th></th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Groups</th>
+          <th>Num. of Transactions</th>
+          <th>Transactions</th>
+        </thead>
+        <tbody class="highlight">
+          <% members.forEach((users, idx) => { %>
+          <%if (user.id !== users.id) {%>
+          <!--<tr><%#users%><%# users.transaction %></tr>-->
+            <tr>
+              <% if (users.avatar) {%>
+              <td><img class="avatar" src="<%= users.avatar %>" alt="<%= users.name  %>'s avatar"></td>
+              <% } else { %>
+                <td alt="<%= users.name  %>'s avatar"><i id="user-account" class="las la-user"></i></td>
+              <%}%>
+              <td><%= users.name  %></td>
+              <%if (!users.email) {%>
+              <td>No Email</td>
+              <% } else { %>
+                <td><%=users.email%></td>
+              <%}%>
+              <%if (users.group == 0 || !users.group) {%>  
+              <td>Has not joinned group</td> 
+              <% } else { %>
+              <td><%= users.group  %></td>
+              <%}%>
+              <td><%=users.transaction.length%></td>
+              <td class="transactions-list">
+                <%if (users.transaction.length === 0) {%>
+                No Transactions
+                <%} else {%>
+                <ul>
+                <%users.transaction.forEach((pay, idx) => { %>
+                  <li><%=idx+1 +': $'+  pay.paymentAmount  %></li>
+                <%})%>
+                </ul>
+                <%}%>
+              </td>
+                <!--<td>$<%# users.transaction[0].paymentAmount %></td>-->
+              <%}%>
+            <% if (!users) {%>
+            No Other users
+           <% } %>
+          </tr>
+           <% }) %>
+      </tbody>
+    </table>
+   
+
     <% } else { %>
-        <h1>You are not Authorized as Group Administrator</h1>
+        <h3 class="group-admin-header center">You are not Authorized as Group Administrator</h3>
+        <a href="/members">Return to Member Dashboard</a>
     <% } %>
-</body>
-</html>
+  </main>
+
+  <%- include('../partials/footer') %>

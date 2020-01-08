@@ -14,18 +14,19 @@ router.get('/login', function(req, res) {
   });
 });
 
-router.get('/payments/charge', membersCtrl.isLoggedIn, membersCtrl.paymentCharges)
+router.post('/payments/charge', membersCtrl.isLoggedIn, membersCtrl.postPayment)
 router.get('/payments', membersCtrl.isLoggedIn, membersCtrl.makePayment)
 
 router.post("payments/charge", membersCtrl.isLoggedIn, membersCtrl.postPayment);
 
 //Get Groups
 router.get('/group/:id', membersCtrl.isLoggedIn, groupsCtrl.index);
+router.post('/group/:id', membersCtrl.isLoggedIn, membersCtrl.updateGroupMember);
 
 // GET members
 // router.get('/members', isLoggedIn, (req, res) =>
 //   res.render('index', {keyPublishable}))
-router.get('/members', membersCtrl.isLoggedIn, membersCtrl.index);
+router.get('/members', membersCtrl.isLoggedIn, membersCtrl.index, function (member){ id: member._id});
 // router.get('/members/group/:id', isLoggedInAsAdmin, groupAdminsCtrl.index);
 // router.get('/members', isLoggedIn, membersCtrl.index);
 
