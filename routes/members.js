@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router();
+const membersCtrl = require('../controllers/members')
 
-router.get('/members', function(req, res) {
-  res.render('members/index', function (member){ id: member._id});
-});
+
+router.get('/member', membersCtrl.index);
+
+router.get('/:id', membersCtrl.isLoggedIn, membersCtrl.getMember)
+router.post('/:id', membersCtrl.isLoggedIn, membersCtrl.updateMember)
 
 module.exports = router;

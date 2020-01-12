@@ -1,12 +1,13 @@
 
 <%- include('../partials/header') %>
 
-<main class="header">
-  <div id="stripe-form">
+<main class="header sidebar">
+  <div id="stripe-form sidebar">
 
-    <form action="/payments/charge" method="POST">
+    <form action="/member" method="POST">
+      <div>Make a Stripe Payment</div>
       <noscript>You must <a href="http://www.enable-javascript.com" target="_blank">enable JavaScript</a> in your web browser in order to pay via Stripe.</noscript>
-      <input id="paymentInput" type="number" placeholder="Enter Amount here" name="paymentAmount" required min="100">
+      <input class="strip-input browser-default" id="paymentInput" type="number" placeholder="Enter Amount here" name="paymentAmount" value="1000" min="1000" required>
       <button
           id="paymentBtn"
           type="submit" 

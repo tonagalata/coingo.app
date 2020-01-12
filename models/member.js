@@ -13,9 +13,21 @@ const transactionSchema = new Schema({
   },
   paymentAmount: {
     type: String,
-    default: 0
+    default: 0,
+    min: 100
   },
-
+  payee: {
+    type: String
+  },
+  payer: {
+    type: String
+  },
+  payeeAvatar: {
+    type: String
+  },
+  payeeAvatar: {
+    type: String
+  }
 }, {
   timestamps: true
 });
@@ -37,7 +49,7 @@ const memberSchema = new Schema({
   group: [groupSchema],
   groupAdmin: {type: Boolean, default: false},
   Admin: {type: Schema.Types.ObjectId, ref: 'GroupAdmin'},
-  siteAdmin: [{type: Schema.Types.ObjectId, ref: 'SiteAdmin'}],
+  siteAdmin: {type: Schema.Types.ObjectId, ref: 'SiteAdmin'},
   googleId: String,
   facebookId: String,
   linkedinId: String,

@@ -19,7 +19,7 @@
 <body>
 	<nav id="navigation" class="grey lighten-3">
 		<div class="nav-wrapper">
-			<div class="logo-container"><a href="/members">
+			<div class="logo-container"><a href="/member">
 				<h5 class="logo-name">COING</h5>
 				<img class="logo-img" src="/images/coin.png" alt="coin"></a>
 			</div>
@@ -27,7 +27,9 @@
 				<li class="hide-on-med-and-down"><a href="/payments">Make a Payment</a></li>
 				<li class="hide-on-med-and-down"><a href="/group/1">Funding Group 1</a></li>
 				<li class="hide-on-med-and-down"><a href="/group/2">Funding Group 2</a></li>
+				<% if (user.groupAdmin === true) { %>
 				<li class="hide-on-med-and-down"><a href="/admin/<%= user._id %>">Group Admin</a></li>
+				<%}%>
 				<li><% if (user) { %>
 					<a href="/logout"><i class="material-icons left">trending_flat</i>Log Out</a>
 					<form action="">
@@ -35,6 +37,11 @@
 				<% } else { %>
 					<a href="/login"><i class="material-icons left">vpn_key</i>Login</a>
 				<% } %></li>
+				<%# if (user.avatar) {%>
+					<!-- <li><img class="avatar" src="<%#= user.avatar %>" alt="<%#= user.name  %>'s avatar"></li> -->
+					<%# } else { %>
+						<!-- <li><i id="user-account" class="las la-user"></i></li> -->
+						<%#}%>
 			</ul>
 		</div>
 	</nav>

@@ -1,19 +1,19 @@
 <%- include('../partials/header') %>
+
 <main class="group-main">
-  <h5 class="center">Funding Group #<%= id %></h5>
+  <%if(user.group.name) {%>
+  <h5 class="center">Funding Group: <%= user.group[0].name %></h5>
+  <%}%>
   <div class="funding-goal">
     <label>Funding Goal:</label>
       <div id="goal-amount">$20,000.00</div>
   </div>
   <div>
-    <!--<div>Group Name: <%#= user.group[0].groupMembers %></div>-->
-    <!--<div>Group No: <%#= user.group[0].name %></div>-->
     <% if(user.group) { %>
-    <table>
+    <table class="group-table">
       <thead>
         <th>Name</th>
         <th>Email</th>
-        <th>Avatar</th>
         <th>Transaction ID</th>
         <th>Transaction Amount</th>
         <th>Group Name</th>
@@ -25,7 +25,6 @@
       <tr>
         <td><%= us.name %></td>
         <td><%= us.email %></td>
-        <td><%= us.avatar %></td>
         <td>
         <%if (us.transaction.length === 0) {%>
           No Transactions
@@ -55,7 +54,6 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.avatar %></td>
         <td>
         <%if (user.transaction.length === 0) {%>
           No Transactions
@@ -100,6 +98,8 @@
       This group does not have members
     <% }%>
   </div>
+
+  <%# if (user.groupAdmin === true) { %>
   <div class="group-form">
     <div class="center">Update Group Membership</div>
     <form action="/group/<%= id %>" method="POST">
@@ -108,5 +108,6 @@
       <button>Add to Group</button>
     </form>  
   </div>
+  <%#}%>
 </main>
 <%- include('../partials/footer') %>

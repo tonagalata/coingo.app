@@ -9,6 +9,7 @@ const session = require('express-session');
 // Require the Stripe library with a test secret key.
 const stripe = require("stripe")(keySecret);
 const bodyParser = require("body-parser");
+const emoji = require('node-emoji')
 
 require('dotenv').config();
 require('./config/database')

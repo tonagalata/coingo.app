@@ -14,19 +14,24 @@ router.get('/login', function(req, res) {
   });
 });
 
-router.post('/payments/charge', membersCtrl.isLoggedIn, membersCtrl.postPayment)
+router.get('/', membersCtrl.isLoggedIn, membersCtrl.redirectToLogIn);
+
+// router.get('member/:id', membersCtrl.isLoggedIn, membersCtrl.getMember)
+// router.post('member/:id', membersCtrl.isLoggedIn, membersCtrl.updateMember)
+
+router.post('/member', membersCtrl.isLoggedIn, membersCtrl.postPayment, membersCtrl.makePayment)
 router.get('/payments', membersCtrl.isLoggedIn, membersCtrl.makePayment)
 
-router.post("payments/charge", membersCtrl.isLoggedIn, membersCtrl.postPayment);
+// router.post("payments/charge", membersCtrl.isLoggedIn, membersCtrl.postPayment);
 
 //Get Groups
 router.get('/group/:id', membersCtrl.isLoggedIn, groupsCtrl.index, membersCtrl.updateGroupMember);
-router.post('/group/:id', membersCtrl.isLoggedIn, membersCtrl.updateGroupMember);
+router.post('/group/:id', membersCtrl.isLoggedIn, membersCtrl.updateGroupMember, membersCtrl.index);
 
 // GET members
 // router.get('/members', isLoggedIn, (req, res) =>
 //   res.render('index', {keyPublishable}))
-router.get('/members', membersCtrl.isLoggedIn, membersCtrl.index, function (member){ id: member._id});
+// router.get('/member', membersCtrl.isLoggedIn, membersCtrl.index, function (member){ id: member._id});
 // router.get('/members/group/:id', isLoggedInAsAdmin, groupAdminsCtrl.index);
 // router.get('/members', isLoggedIn, membersCtrl.index);
 
@@ -36,7 +41,7 @@ router.post('/transactions', membersCtrl.isLoggedIn, membersCtrl.addTransaction)
 // DELETE /transactions/:id
 router.delete('/transactions/:id', membersCtrl.isLoggedIn, membersCtrl.delTransaction);
 
-router.delete('/members/:id', membersCtrl.isLoggedIn, membersCtrl.delMember);
+router.delete('/member/:id', membersCtrl.isLoggedIn, membersCtrl.delMember);
 
 // function isLoggedInAs(req, res, next) {
 //   if (req.isAuthenticated()) return next();
@@ -54,7 +59,7 @@ router.get('/auth/google', passportGoogle.authenticate(
 router.get('/google/oauth2callback', passportGoogle.authenticate(
   'google',
   {
-    successRedirect : '/members',
+    successRedirect : '/member',
     failureRedirect : '/login'
   }
 ));
@@ -63,13 +68,13 @@ router.get('/google/oauth2callback', passportGoogle.authenticate(
 // Facebook OAuth login route
 router.get('/auth/facebook', passportFacebook.authenticate(
   'facebook',
-  { scope: 'public_profile,email' }));
+  { scope: 'public_profile, email' }));
 
   // Facebook OAuth callback route
 router.get('/facebook/oauth2callback', passportFacebook.authenticate(
   'facebook',
   {
-    successRedirect : '/members',
+    successRedirect : '/member',
     failureRedirect : '/login'
   }
 ),
@@ -86,7 +91,7 @@ router.get('/auth/linkedin', passportLinkedin.authenticate(
 router.get('/linkedin/oauth2callback', passportLinkedin.authenticate(
   'linkedin',
   { 
-    successRedirect : '/members', 
+    successRedirect : '/member', 
     failureRedirect : '/login' }
 ));
 
