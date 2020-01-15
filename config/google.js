@@ -18,7 +18,7 @@ function(accessToken, refreshToken, profile, cb) {
       const newMember = new Member({
         name: profile.displayName,
         email: profile.emails[0].value,
-        avatar: profile.photos[0].value,
+        // avatar: profile.photos[0].value,
         googleId: profile.id
       });
       newMember.save(function(err) {

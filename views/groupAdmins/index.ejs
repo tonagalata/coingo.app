@@ -2,7 +2,7 @@
 
   <% if (user.groupAdmin === true) { %>
     <main class="group-admin-main">
-    <h3 class="group-admin-header">Welcome <%=user.name%></h3>
+    <h3 class="center group-admin-header">Welcome <%=user.name%></h3>
     <h5 class="center">Your Information</h5>
     <table>
       <thead>
@@ -27,32 +27,25 @@
             <td><%=user.email%></td>
           <%}%>
           <td>
-            <%= user.group[0].name %>
-          <%if (user.group == 0 || !user.group) {%>  
-              <ul>
-            <%user.group.forEach((gr) => {%>
-              <li><%= gr.name %></li>
-            <%})%>
-          <%}%>  
-          </ul>
+            <% if (user.group) {%>
+              <%= user.group %>
+          <%} else {%>
+            Has not joinned group
+            <%}%>
           </td>
-          <td>
-              <ul>
-            <%user.group.forEach((gr) => {%>
-              <li><%= gr.groupMembers %></li> 
-            <%})%>
-          </ul>
-          </td>
+
           <td><%=user.transaction.length%></td>
           <td class="transactions-list">
             <%if (user.transaction.length === 0) {%>
               No Transactions
             <%} else {%>
-            <ul>
+          <a id="#dropdown-trigger" class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
+              <ul id='dropdown1' class='dropdown-content'>
           <%user.transaction.forEach((pay, idx) => { %>
-          <li><%=idx+1 +': $'+ pay.paymentAmount  %></li>
+                <li><%=idx+1 +': $'+ pay.paymentAmount  %></li>
+                <li class="divider" tabindex="-1"></li>
           <%})%>
-        </ul class="transactions-list">
+              </ul>
         <%}%>
         </td>
         </tr>
@@ -95,9 +88,11 @@
                 <%if (users.transaction.length === 0) {%>
                 No Transactions
                 <%} else {%>
-                <ul>
+                <a id="#dropdown-trigger" class='dropdown-trigger btn' href='#' data-target='dropdown1'>View</a>
+                  <ul id='dropdown1' class='dropdown-content'>
                 <%users.transaction.forEach((pay, idx) => { %>
-                  <li><%=idx+1 +': $'+  pay.paymentAmount  %></li>
+                  <li class="list-transactions"> <%= idx+1 +': $'+ pay.paymentAmount  %> </li>
+                  <li class="divider" tabindex="-1"></li>
                 <%})%>
                 </ul>
                 <%}%>

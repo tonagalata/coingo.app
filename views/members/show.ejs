@@ -1,64 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>COINGO | Group Savings</title>
-  <link rel="stylesheet" href="/css/stylesheet.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-		<script src="https://js.stripe.com/v3/"></script>
-		<script src="https://checkout.stripe.com/v2/checkout.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-		<script defer src="/js/script.js"></script>
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+<%- include('../partials/header') %>
 
-</head>
-<body>
-    <nav>
-      <ul>
-        <a href="/<%= user._id %>">
-        <li id="user-avatar" >
-          <img src="https://img.icons8.com/bubbles/500/000000/barack-obama.png">
-        </li>
-        </a>
-        <% if (user/*.groupAdmin === true*/) { %>
-        <a href="/admin/<%= user._id %>">
-        <li id="admin-avatar">
-          <label for="admin-avatar">Admin Portal</label>
-          <img src="https://img.icons8.com/clouds/500/000000/employee-card.png">
-        </li>
-      </a>
-      <%}%>
-        <a href="/members">
-        <li id="all-members">
-           <label for="all-members">Members</label>
-           <img src="https://img.icons8.com/clouds/500/000000/conference-call.png"></li>
-        </a>
-        <a href="/transactions">
-        <li id="all-transactions">
-           <label for="all-transactions">Transactions</label>
-          <img src="https://img.icons8.com/officel/320/000000/ledger.png"></li>
-        </a>
-        <a href="/group">
-        <li id="all-groups">
-           <label for="all-groups">Groups</label>
-          <img src="https://img.icons8.com/bubbles/500/000000/people-group-bill--v1.png"></li>
-          </a>
-          <% if (user) { %><a href="/logout">
-        <li id="log-out">
-           <!-- <label for="log-out">Logout</label> -->
-          <img src="https://img.icons8.com/cotton/320/000000/logout-rounded.png"></li></a>
-          <% } else { %>
-            <a href="/login"><i class="material-icons left">vpn_key</i>Login</a>
-          <% } %></li>
-        </ul>
-    </nav>
-    <section>
+    <section class="member-info">
+      <h4 class="center">Update Your info</h4>
+      <div class="row edit-fields">
+        <form class="col s12" action="/<%=user._id%>?_method=PUT" method="POST">
+          <div class="row">
+            <div class="input-field col s6">
+              <input name="name" placeholder="Placeholder" id="fl_name" type="text" class="validate" value="<%=user.name%>">
+              <label for="fl_name">Name</label>
+            </div>
+            <div class="input-field col s6">
+              <select name="avatar" id="avatar-picker" class="icons">
+                <option data-icon="<%=user.avatar%>" value="" disabled selected>Choose your Avatar</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/guest-male.png" value="https://img.icons8.com/clouds/50/000000/guest-male.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/guest-male.png"') ? 'selected' : '' %>">Male 1</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/user.png" value="https://img.icons8.com/clouds/50/000000/user.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/user.png"') ? 'selected' : '' %>">User</option>
+                <option data-icon="https://img.icons8.com/bubbles/50/000000/cloud-account-login-female.png" value="https://img.icons8.com/bubbles/50/000000/cloud-account-login-female.png" <%= (user.avatar === '"https://img.icons8.com/bubbles/50/000000/cloud-account-login-female.png"') ? 'selected' : '' %>">Female 1</option>
+                <option data-icon="https://img.icons8.com/bubbles/50/000000/cloud-account-login-male.png" value="https://img.icons8.com/bubbles/50/000000/cloud-account-login-male.png" <%= (user.avatar === '"https://img.icons8.com/bubbles/50/000000/cloud-account-login-male.png"') ? 'selected' : '' %>">Male 2</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/businesswoman.png" value="https://img.icons8.com/clouds/50/000000/businesswoman.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/businesswoman.png"') ? 'selected' : '' %>">Female 2</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/nerd-hair.png" value="https://img.icons8.com/clouds/50/000000/nerd-hair.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/nerd-hair.png"') ? 'selected' : '' %>">Female 3</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/manager.png" value="https://img.icons8.com/clouds/50/000000/manager.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/manager.png"') ? 'selected' : '' %>">Male 3</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/user-female.png" value="https://img.icons8.com/clouds/50/000000/user-female.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/user-female.png"') ? 'selected' : '' %>">Female 4</option>
+                <option data-icon="https://img.icons8.com/bubbles/50/000000/barack-obama.png" value="https://img.icons8.com/bubbles/50/000000/barack-obama.png" <%= (user.avatar === '"https://img.icons8.com/bubbles/50/000000/barack-obama.png"') ? 'selected' : '' %>">Obama</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input disabled value="I am not editable" id="disabled" class="validate" type="password">
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input name="email" id="email" type="email" class="validate" value="<%= user.email %>">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <button class="btn wave-light" type="submit">Submit</button>
+        </form>
+      </div>
+        
+      <%if(user.transaction) {%>
+
+      <table class="highlight">
+        <thead>
+          <tr>
+              <th>#</th>
+              <th>Transaction Id</th>
+              <th>Member Payed</th>
+              <th>Amount</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%user.transaction.forEach((trans, idx) => {%>
+            <tr>
+              <td><%=idx+1%></td>
+              <td><%=trans._id%></td>
+              <td><%=trans.payer%></td>
+              <td><%=trans.paymentAmount%></td>
+            </tr>
+          <%});%>
+        </tbody>
+      </table>
+      <%} else {%>
+        <div class="row">
+          <div class="col s12">
+            <div>
+              <h4 class="center">No Transactions</h4>
+            </div>
+          </div>
+        </div>
+        <%}%>
+    </section>
+
+    <%- include('../partials/footer') %>

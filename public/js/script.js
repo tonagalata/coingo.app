@@ -1,3 +1,21 @@
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, options);
+});
+
+// Or with jQuery
+
+$('.dropdown-trigger').dropdown();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('#dropdown-trigger');
+  var instances = M.Dropdown.init(elems, options);
+});
+
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
 // $(document).ready(function() {
  
 //             $('#paymentInput').focusout((e) => {
@@ -65,8 +83,8 @@
         var displayAmount = parseFloat(Math.floor($("#amountInDollars").val() * 100) / 100).toFixed(2);
         // Open Checkout with further options
         handler.open({
-          name: 'CoinGo Payment',
-          description: 'Amount ($' + displayAmount + ')',
+          name: 'CoinGo',
+          description: 'Amount | $' + displayAmount,
           amount: amountInCents,
         });
         e.preventDefault();

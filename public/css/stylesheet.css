@@ -6,11 +6,15 @@
 
 body {
   margin: 0;
+  padding: 0;
   font-family: Helvetica;
 }
 
 nav {
   background: none !important;
+  width: 100%;
+  margin-left: 0px;
+  overflow: hidden;
 }
 
 nav > ul{
@@ -19,16 +23,38 @@ nav > ul{
   height: 8vh;
   /* background-color: #fff; */
   align-items: center;
+  padding: 0;
+  height: 64px;
+  width: 100%;
   /* border-bottom: 1px solid #000; */
+}
+
+nav > ul > a{
+  
 }
 
 nav > ul > a:first-child{
   margin-right: auto;
   /* background-color: #fff; */
+  height: 64px;
   width: 6rem;
-  align-items: center;
-  /* border-bottom: 1px solid #000; */
+
 }
+
+nav > ul > a:nth-child(n) {
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+
+
+nav > ul > a:last-child {
+  align-items: center;
+  height: 64px;
+  display: flex;
+}
+
 
 nav > ul > a:hover{
   opacity: .8;
@@ -36,9 +62,14 @@ nav > ul > a:hover{
   background-color: rgb(97, 97, 95);
 }
 
-#all-transactions > img {
-  height: 40px;
-  margin-top: 10px;
+#all-transactions, #make-payment {
+  display: flex;
+  height: 35px;
+}
+
+#all-transactions > img, #make-payment > img {
+  align-items: center;
+  height: 35px;
 }
 
 nav > ul > a > li {
@@ -54,24 +85,13 @@ nav > ul > a > li {
 
 nav > ul > a > li > img {
   height: 50px;
+  display: flex;
 }
 
-/* a > #admin-avatar:hover, #all-transactions:hover, #all-groups:hover, #log-out:hover, #all-members:hover, #admin-avatar:hover, #all-transactions > img:hover, #all-groups > img:hover, #log-out > img:hover, #all-members > img:hover  {
-  opacity: .8;
-  cursor: pointer;
-  background-color: rgb(97, 97, 95);
-}
-
-nav > ul > a > li > img:active {
-  opacity: .8;
-  background: ;
-  cursor: pointer;
-} */
-
-nav > ul > a > li:first-child {
+/* nav > ul > a > li:first-child {
   margin-right: auto;
   margin-left: 0;
-}
+} */
 
 section {
   display: flex !important;
@@ -112,13 +132,17 @@ section {
 .member-transactions {
   display: flex;
   /* margin: 5px 5px; */
-  margin-top: 2%;
+  /* margin-top: 2%; */
   line-height: normal;
   margin-left: 5%;
   /* border: 2px solid #000; */
   width: 90%;
   height: 70px;
   align-items: center;
+}
+
+.main-container > div > .row, .main-container > div > .row > .col.s12 > .card-panel {
+  margin-bottom: 0;
 }
 
 .tranactions-payer-avatar {
@@ -174,9 +198,10 @@ section {
 }
 
 .chat-messages-container {
-  height: 100vh;
-  border: 1px solid #000;
+  height: 100vw;
+  width: 100%;
   overflow: scroll;
+  border-left: 1px solid #000;
 }
 
 .messages-input > div > form > input[type=text]{
@@ -333,10 +358,13 @@ section {
   display: flex;
   background: #fff;
   height: 40px;
-  border: 1px solid #000;
   padding-right: 2%;
   width: 100%;
   margin-bottom: 10px;
+}
+
+#payment {
+  padding-right: 0 !important;
 }
 
 #payment > img, #search > img {
@@ -365,31 +393,54 @@ section {
   box-shadow: rgba(40, 157, 161, .9);
 }
 
-#admin-avatar > label, #all-transactions > label {
+#admin-avatar > label {
   color: #000;
   font-size: 10px;
   position: absolute;
   top: 23px;
   font-weight: bold;
-  margin-left: -9px;
+  margin-left: -7px;
+}
+
+#all-transactions > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 23px;
+  font-weight: bold;
+  margin-left: -11px;
 }
 
 #log-out > a > img  {
   height: 45px;
 }
 
-#all-groups > label, #log-out > label, #all-members > label {
+#all-members > label {
   color: #000;
   font-size: 10px;
   position: absolute;
-  top: 23px;
+  top: 24px;
   font-weight: bold;
   margin-left: 5px;
 }
 
-/* #log-out > label {
-  margin-left: 17px !important;
-} */
+#all-groups > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 24px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+#make-payment > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 24px;
+  font-weight: bold;
+  margin-left: -5px;
+}
 
 .transactions {
   margin-top: 25px;
@@ -444,15 +495,20 @@ section {
     width: 202px;
   }
 
+  #all-transactions {
+    width: 100%;
+  }
+
   #admin-avatar > label, #all-transactions > label {
     display: none;
   }
 
   #all-transactions > img {
     margin-top: 2px;
+    margin-bottom: 0px;
   }
   
-  #all-groups > label, #log-out > label, #all-members > label {
+  #all-groups > label, #log-out > label, #all-members > label, #make-payment > label {
     display: none;
   }
   
@@ -468,6 +524,11 @@ section {
     height: 45px;
   }
 
+  nav > ul > a{
+    margin-top: 0 !important;
+    height: 64px !important;
+  }
+
   nav > ul > a > li > img {
     height: 45px;
   }
@@ -476,11 +537,6 @@ section {
     font-size: 14px;
     height: 50px;
     margin-top: 0px !important;
-  }
-
-  nav > ul {
-    margin-top: 0px !important;
-    padding-top: 0px;
   }
 
   nav {
@@ -552,3 +608,72 @@ section {
 .messages > div {
   align-items: center;
 }
+
+.edit-fields {
+  margin: 30px auto;
+  width: 100%;
+}
+
+.edit-fields > form {
+  margin-bottom: 30px;
+}
+
+.member-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-image {
+  height: 20px;
+}
+
+.form-payment {
+  margin-left: 15% !important;
+  margin-bottom: 50px !important;
+}
+
+.card-content {
+  font-size: smaller !important;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+}
+
+.card, .horizontal {
+  margin-bottom: 5px !important;
+}
+
+.card-image > img {
+  max-height: 70px !important;
+}
+
+.chat-message-card {
+  margin: .25rem !important;
+}
+
+footer {
+  margin: 0;
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  z-index: 999;
+  margin-top: 100px;
+  padding: 20px;
+}
+
+footer p {
+  margin: 10px 0 0 0;
+}
+
+footer i {
+  color: red;
+}
+
+footer a {
+  color: #3c97bf;
+  text-decoration: none;
+}
+
+.list-transactions {
+  padding: 10px;
+}
+

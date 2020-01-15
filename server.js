@@ -11,6 +11,11 @@ const stripe = require("stripe")(keySecret);
 const bodyParser = require("body-parser");
 const emoji = require('node-emoji')
 
+//Socket.io mount
+const app = express();
+// const server = require('http').Server(app)
+// const io = require('socket.io')(server)
+
 require('dotenv').config();
 require('./config/database')
 require('./config/google')
@@ -18,17 +23,20 @@ require('./config/facebook')
 require('./config/linkedin')
 const port = process.env.LISTENING_PORT
 
-const app = express();
+
 
 const indexRoutes = require('./routes/index')
+const groupsRoutes = require('./routes/groups')
 const membersRoutes = require('./routes/members')
 const groupAdminsRoutes = require('./routes/groupAdmins')
 const adminsRoutes = require('./routes/admins')
+const transactionsRoutes = require('./routes/transactions')
 
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'))
 app.use(morgan('dev'));
+app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(require('body-parser').urlencoded({
   extended: false
@@ -41,72 +49,39 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.post("/charge", (req, res) => {
-//   let amount = 500;
+//Socket.io code
+// const groups = { }
 
-//   stripe.customers.create({
-//     email: req.body.email,
-//     card: req.body.id
-//   })
-//   .then(customer =>
-//     stripe.charges.create({
-//       amount,
-//       description: "Sample Charge",
-//       currency: "usd",
-//       customer: customer.id
-//     }))
-//   .then(charge => res.send(charge))
-//   .catch(err => {
-//     console.log("Error:", err);
-//     res.status(500).send({error: "Purchase Failed"});
-//   });
-// });
+// app.get('/', (req, res) => {
+//   res.render('index', { groups: groups })
+// })
+
+// app.post('/group', (req, res) => {
+//   if (groups[req.body.group] != null) {
+//     return res.redirect('/')
+//   }
+//   groups[req.body.group] = { users: {} }
+//   res.redirect(req.body.group)
+//   // Send message that new group was created
+//   io.emit('group-created', req.body.group)
+// })
+
+// app.get('/:group', (req, res) => {
+//   if (groups[req.params.group] == null) {
+//     return res.redirect('/')
+//   }
+//   res.render('group', { groupName: req.params.group })
+// })
+
+//Socket.io handlers
+
 
 app.use('/', indexRoutes);
+app.use('/', groupsRoutes);
+app.use('/', transactionsRoutes);
 app.use('/', membersRoutes);
 app.use('/', groupAdminsRoutes);
 app.use('/', adminsRoutes);
 
-// (async () => {
-//   const session = await stripe.checkout.sessions.create({
-//     payment_method_types: ['card'],
-//     line_items: [{
-//       name: 'T-shirt',
-//       description: 'Comfortable cotton t-shirt',
-//       images: ['https://example.com/t-shirt.png'],
-//       amount: 500,
-//       currency: 'usd',
-//       quantity: 1,
-//     }],
-//     success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
-//     cancel_url: 'https://example.com/cancel',
-//   });
-// })();
-
-// app.get('/payments', (req, res) =>
-//   res.render('payments/index', {keyPublishable}))
-
-// app.post("payments/charge", (req, res) => {
-//   // console.log(req.body)
-//   let amount = 500;
-  
-//   stripe.customers.create({
-//     email: req.body.stripeEmail,
-//     source: req.body.stripeToken,
-//   })
-//   .then(customer =>
-//     stripe.charges.create({
-//       amount,
-//       description: "Sample Charge",
-//       currency: "usd",
-//       customer: customer.id
-//     }))
-//   .then(charge => res.render('payments/charge'))
-//   .catch(err => {
-//     console.log("Error:", err);
-//     res.status(500).send({error: "Purchase Failed"});
-//   });
-// });
-
 app.listen(port, () =>
-  console.log(`Express listening on port ${port}`));
+  console.log(`Server listening on port ${port}`));

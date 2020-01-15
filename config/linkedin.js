@@ -19,7 +19,7 @@ function(accessToken, refreshToken, profile, cb) {
         const newMember = new Member({
           name: profile.displayName,
           email: profile.email,
-          avatar: profile.photos[3].value,
+          // avatar: profile.photos[3].value,
           linkedinId: profile.id
         });
         newMember.save(function(err) {

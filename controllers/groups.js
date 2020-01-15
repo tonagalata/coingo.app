@@ -1,35 +1,96 @@
 const Member = require('../models/member');
+const Group = require('../models/group');
 
 module.exports = {
-  index
+  index,
+  show,
+  newGroup,
+  create
 };
 
-// function index(req, res) {
-//   Student.find({}, function(err, students) {
-//     res.render('students/index', { students });
-//   });
-// }
+function index (req, res) {
+  Group.find({})
+  .populate('groupMember').exec(function(err, group) {
+    console.log(group)
+    Member.find({_id: {$in: group.groupMembers}})
 
-function index(req, res, next) {
-  console.log(req.params.id)
-  Member.find({}, function(err, members){
-   res.render('groups/index', {
-    members,
-    user: req.user,
-    id: req.params.id
-    });
- });
+    res.render('groups/show', {
+      user: req.user,
+      members,
+      group
+     }) 
+  }) 
 }
 
-// function index(req, res, next) {
-//   Member.find({}, function(err, members){
-//    res.render('members/index', {
-//     members,
-//     user: req.user
-//     });
-//  });
-// }
+function show(req, res, next) {
+  // console.log(req.params.id)
+  Group.findById(req.params.id)
+  .populate('groupMember').exec(function(err, group) {
+    
+    // console.log(group)
+    Member.find(
+      {_id: {$in: group}},
+      function(err, members) {
+        console.log(members)
+         res.render('groups/index', {
+          user: req.user,
+          members,
+          group
+           
+         });
+       }
+     );
+    });
+}
 
+function newGroup(req, res) {
+  Group.findById(req.params.id, function(err, groups) {groups})
+  .populate('member').exec(function(err, groups) { 
+    groups
+    Member.find({},
+     function(err, members) {
+       res.render('groups/show', {
+        groups,
+        members,
+        user: req.user,
+        // groupName: groups.name,
+        // groupMember: groups.groupMembers,
+        // payeeAvatar: groups.payeeAvatar,
+        // payerAvatar: groups.payerAvatar,
+
+       });
+     });
+
+  }); console.log(req.body)
+
+  
+//   Group.find({}, function(err, groups) {
+//     res.render('groups/show', {
+//       user: req.user,
+//       groupName: groups.name,
+//       avatar: req.user.avatar,
+//       groups,
+//     })
+//   })
+// }
+  }
+      
+function create(req, res) {
+  let str = req.headers.referer;
+  let ref = str.substring(29, 53)
+  Member.findById(req.params.id)
+  .populate('group').exec(function(err, members) {
+    groups: members.group
+
+  Group.create( 
+    function(err, groups) {
+    req.body,
+    members,
+    groups,
+    res.redirect('/member/'+`${ref}`+'/groups');
+  });
+})
+}
 
 
 

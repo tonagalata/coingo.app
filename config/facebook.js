@@ -19,7 +19,7 @@ function(accessToken, refreshToken, profile, cb) {
       const newMember = new Member({
         name: profile.displayName,
         email: profile.emails,
-        avatar: profile.photos,
+        // avatar: profile.photos,
         facebookId: profile.id
       });
       newMember.save(function(err) {

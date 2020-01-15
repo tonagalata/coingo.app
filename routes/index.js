@@ -8,11 +8,7 @@ const passportFacebook = require('../config/facebook');
 const passportLinkedin = require('../config/linkedin');
 const passportGoogle = require('../config/google');
 
-router.get('/login', function(req, res) {
-  res.render('index', {
-	  user: req.user
-  });
-});
+router.get('/login', membersCtrl.login);
 
 router.get('/', membersCtrl.isLoggedIn, membersCtrl.redirectToLogIn);
 
@@ -36,10 +32,11 @@ router.post('/group/:id', membersCtrl.isLoggedIn, membersCtrl.updateGroupMember,
 // router.get('/members', isLoggedIn, membersCtrl.index);
 
 // POST /transactions
-router.post('/transactions', membersCtrl.isLoggedIn, membersCtrl.addTransaction);
+// router.post('/transactions', membersCtrl.isLoggedIn, membersCtrl.addTransaction);
+// router.get('/transactions', membersCtrl.isLoggedIn, membersCtrl.showTransactions);
 
 // DELETE /transactions/:id
-router.delete('/transactions/:id', membersCtrl.isLoggedIn, membersCtrl.delTransaction);
+// router.delete('/transactions/:id', membersCtrl.isLoggedIn, membersCtrl.delTransaction);
 
 router.delete('/member/:id', membersCtrl.isLoggedIn, membersCtrl.delMember);
 
@@ -99,6 +96,7 @@ router.get('/linkedin/oauth2callback', passportLinkedin.authenticate(
 // OAuth logout route
 router.get('/logout', function(req, res){
   req.logout();
+  //destroy stripe cookie
   res.redirect('/login');
 });
 

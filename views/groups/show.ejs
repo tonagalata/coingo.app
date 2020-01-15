@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<form action="/member/<%=user._id%>/groups" method="POST">
+  <input placeholder="Group Name" type="text" name="groupName" value="<%=groups%>">
+  <!-- <input placeholder="Member Name" type="text" name="groupMembers" value="<%#=members.group%>"> -->
+  <select class="icons" name="groupMembers">
+    <option value="" disabled selected>Search For Members</option>
+    <%if(!!members) {%>
+    <% members.forEach((pix) => {%>
+    <option value="<%=pix._id%>" data-icon="<%=pix.avatar%>"><%=pix.name%></option>
+    <%})%>
+    <%}else{%>
+      <option value="<%=user._id%>" data-icon="<%=user.avatar%>"><%=user.name%></option>
+    <%}%>
+  </select>
+  <input type="text" name="avatar" value="<%=user.avatar%>">
+  <button class="btn wave-light" type="submit">Submit</button>
+</form>
+
+<div></div>
+
+<div><%= members.groupMembers %></div>
+
+<%- include('../partials/footer') %>

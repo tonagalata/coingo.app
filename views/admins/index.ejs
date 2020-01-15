@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Site Admin</title>
-</head>
-<body>
+<%- include('../partials/footer') %>
+
   <% if (!user.siteAdmin) { %>
     <h1>Welcome Site Admin</h1>
     <% } else { %>
       <h1>You are not Authorized an as Site Admin</h1>
     <% } %>
-</body>
-</html>
+   
+    <%- include('../partials/footer') %>
