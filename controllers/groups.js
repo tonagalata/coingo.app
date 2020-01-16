@@ -9,12 +9,12 @@ module.exports = {
 };
 
 function index (req, res) {
-  Group.find({})
-  .populate('groupMember').exec(function(err, group) {
+  Member.findById(req.params.id)
+  .populate('group').exec(function(err, group) {
     console.log(group)
-    Member.find({_id: {$in: group.groupMembers}})
+    Group.find({_id: {$in: group}})
 
-    res.render('groups/show', {
+    res.render('groups/index', {
       user: req.user,
       members,
       group
@@ -25,7 +25,7 @@ function index (req, res) {
 function show(req, res, next) {
   // console.log(req.params.id)
   Group.findById(req.params.id)
-  .populate('groupMember').exec(function(err, group) {
+  .populate('member').exec(function(err, group) {
     
     // console.log(group)
     Member.find(
@@ -52,27 +52,12 @@ function newGroup(req, res) {
        res.render('groups/show', {
         groups,
         members,
+        groupAvatar: req.body.groupAvatar, 
         user: req.user,
-        // groupName: groups.name,
-        // groupMember: groups.groupMembers,
-        // payeeAvatar: groups.payeeAvatar,
-        // payerAvatar: groups.payerAvatar,
-
        });
      });
 
   }); console.log(req.body)
-
-  
-//   Group.find({}, function(err, groups) {
-//     res.render('groups/show', {
-//       user: req.user,
-//       groupName: groups.name,
-//       avatar: req.user.avatar,
-//       groups,
-//     })
-//   })
-// }
   }
       
 function create(req, res) {

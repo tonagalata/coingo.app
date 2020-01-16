@@ -1,6 +1,7 @@
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 
+const favicon = require('serve-favicon')
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
@@ -35,6 +36,7 @@ const transactionsRoutes = require('./routes/transactions')
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'))
+app.use(favicon("public/images/favicon.ico"));
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 app.use(express.json());

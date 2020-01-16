@@ -1,5 +1,7 @@
 const Member = require('../models/member');
 const Group = require('../models/group');
+const Transaction = require('../models/transaction')
+
 
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
@@ -10,8 +12,6 @@ const emoji = require('node-emoji')
 
 module.exports = {
   index,
-  // addTransaction,
-  // delTransaction,
   delMember,
   paymentCharges,
   makePayment,
@@ -22,8 +22,6 @@ module.exports = {
   updateMember,
   redirectToLogIn,
   login,
-  // showTransactions
-  // ,afterPay
 };
 
 function login(req, res) {
@@ -38,20 +36,16 @@ function redirectToLogIn(req, res) {
 
 function updateGroupMember(req, res, next) {
   Member.findById(req.user.id, function(err, members){
-      // console.log(req.body)
-      // console.log(req.body.groupMembers)
-      // console.log(req.body.name)
+
   members.group.push(req.body)
   members.save((err) => {
     if(err) res.render('/group')
   })
   next(res.redirect(`/group/${req.params.id}`)); 
-  // console.log(members)
 })
 }
 
 function postPayment (req, res, next) {
-    // console.log(req.body)
     let amount = (req.body.paymentAmount * 100);
     
       stripe.customers.create({
@@ -66,13 +60,17 @@ function postPayment (req, res, next) {
              customer: customer.id
         }))
       .then((charge) => {
-        Member.findById(req.user.id, function(err, members){
-        res.redirect('members')
-      members.transaction.push(req.body)
-      members.save((err) => {
-      console.log(err)
-      });
-        });
+        // Member.findById(req.user.id, function(err, members){
+          Member.findById(req.params.id, {Member})
+          const transaction = new Transaction({
+            stripeToken: req.body.stripeT,
+            paymentAmount: req.body.payAmount,
+            payee: req.body.payee,
+            payer: req.body.payer,
+            name: req.body.name,
+          });
+         transaction.save(req.body)
+          res.redirect('members')
       })
     }
 
@@ -88,17 +86,6 @@ function postPayment (req, res, next) {
       })
     }
 
-    // function showTransactions(req, res){
-    //   Member.findById(req.params.id, function(err, member){
-    //     res.render('members/show', {
-    //     member,
-    //     userName: req.user.name,
-    //     avatar: req.user.avatar,
-    //     user: req.user,
-    //     email: req.user.email
-    //     })
-    //   })
-    // }
 
     function updateMember(req, res){
       Member.findByIdAndUpdate(
@@ -112,7 +99,6 @@ function postPayment (req, res, next) {
     }
 
 function paymentCharges (req, res) {
-  // console.log(req.body, req.user)
   Member.findById(req.params.id, function(err, members){
   res.render('payments/show', {
     members,
@@ -152,24 +138,6 @@ function index(req, res, next) {
     });
  });
 }
-
-
-// function addTransaction(req, res, next) {
-//   req.user.transaction.push(req.body);
-//   req.user.save(function(err) {
-//     res.redirect('/member');
-//   });
-// }
-
-// function delTransaction(req, res) {  
-//   // console.log(req.params.id);
-//   // console.log(req.user.transaction);
-//   req.user.transaction.splice(req.params.id, 1);
-
-//   req.user.save(function(err) {
-//     res.redirect('/member');
-//   });
-// }
 
 function delMember(req, res) {
   req.user.remove(req.params.id, function(err) {

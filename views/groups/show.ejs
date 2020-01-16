@@ -13,7 +13,13 @@
       <option value="<%=user._id%>" data-icon="<%=user.avatar%>"><%=user.name%></option>
     <%}%>
   </select>
-  <input type="text" name="avatar" value="<%=user.avatar%>">
+  <select name="groupAvatar" id="avatar-picker" class="icons">
+    <option data-icon="<%= groupAvatar %>" value="" disabled selected>Choose A Group Avatar</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/crowd.png" value="https://img.icons8.com/bubbles/50/000000/crowd.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/crowd.png"') ? 'selected' : '' %>">Group 1</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/couple-shopping-bag.png" value="https://img.icons8.com/bubbles/50/000000/couple-shopping-bag.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/couple-shopping-bag.png"') ? 'selected' : '' %>">Group 2</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/family.png" value="https://img.icons8.com/bubbles/50/000000/family.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/family.png"') ? 'selected' : '' %>">Group 3</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/passenger-with-baggage.png" value="https://img.icons8.com/bubbles/50/000000/passenger-with-baggage.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/passenger-with-baggage.png"') ? 'selected' : '' %>">Group 4</option>
+  </select>
   <button class="btn wave-light" type="submit">Submit</button>
 </form>
 

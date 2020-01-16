@@ -2,39 +2,51 @@
 
     <section class="member-info">
       <div class="row edit-fields">
-        <h5><a class="btn wave-light" href="/member/<%=user._id%>/groups/new">Add Group</a></h5>
-      <%if(user.transaction) {%>
+      <%if(group) {%>
       <table class="highlight">
         <thead>
           <tr>
               <th>#</th>
+              <th>Group Avatar</th>
               <th>Group Id</th>
+              <th>Group Name</th>
               <th>Members</th>
               <th>Join</th>
           </tr>
         </thead>
-
+        
         <tbody>
-          <%= group /*.forEach((trans, idx) => {*/%>
-            <tr>
-              <td><%#=idx+1%></td>
-              <td><%#=trans._id%></td>
-              <td><%#=trans.payer%></td>
-              <td><%#=trans.paymentAmount%></td>
-            </tr>
-          <%#});%>
+          <% user %>
+            <% Object.values(group).forEach((grp, idx) => { %>
+              <%grp%>
+              <tr>
+                <td><%= idx+1 %></td>
+                <td><img src="<%= grp.groupAvatar %>" alt="Group avatar"></td>
+                <td><% let rel = JSON.stringify(grp._id);  %>
+                <%= JSON.parse(rel).substring(17, 24) %></td>
+                <td><%= grp.name %></td>
+                <% let grpVlu = Object.entries(grp.groupMembers) %>
+                <% grp.groupMembers.forEach((gg, idx) => {%> 
+                <td><img src="<%= gg.avatar %>" alt="Group member avatar">
+                  <br />
+                <label><%= gg.name %></label>
+              </td>
+              </tr>
+              <%}) %>
+              <% }) %>
         </tbody>
       </table>
       <%} else {%>
         <div class="row">
           <div class="col s12">
             <div>
-              <h4 class="center">No Transactions</h4>
+              <h4 class="center">No Groups</h4>
             </div>
           </div>
         </div>
         <%}%>
       </div>
+      <h5 class="center"><a class="btn-large wave-light" href="/member/<%=user._id%>/groups/new">Add Group</a></h5>
     </section>
 
     <%- include('../partials/footer') %>

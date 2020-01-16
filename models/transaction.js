@@ -17,15 +17,5 @@ const transactionSchema = new Schema({
   timestamps: true
 });
 
-const groupSchema = new Schema({
-  name: { type: String},
-  groupMembers: [{
-    type: String
-  }]
-}, {
-  timestamps: true
-});
-
-
 
 module.exports = mongoose.model('Transaction', transactionSchema);

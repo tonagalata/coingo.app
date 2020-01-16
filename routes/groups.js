@@ -7,13 +7,32 @@ const groupsCtrl = require('../controllers/groups')
 const membersCtrl = require('../controllers/members')
 
 
-router.get('/member/:id/groups', membersCtrl.isLoggedIn, groupsCtrl.show);
+// router.get('/group/:id', membersCtrl.isLoggedIn, groupsCtrl.index, membersCtrl.updateGroupMember);
+// router.post('/group/:id', membersCtrl.isLoggedIn, membersCtrl.updateGroupMember, membersCtrl.index);
+
+router.get('/member/:id/groups', membersCtrl.isLoggedIn, 
+(req, res) => {
+  Member.findById(req.params.id)
+  Group.find({})
+  .populate('groupMembers').exec(function(err, group) {
+    Member.find({_id: {$in: group}}, Member.find({})
+      )
+    res.render('groups/index', {
+      user: req.user,
+      group,
+     }) 
+  }) 
+});
+
+
+//groupsCtrl.show);
 router.get('/member/:id/groups/new', membersCtrl.isLoggedIn, groupsCtrl.newGroup)
 router.post('/member/:id/groups', membersCtrl.isLoggedIn, (req, res) => {
-  Member.findById(req.params.id)
+  Member.findById(req.params.id, {Member})
   const group = new Group({
     name: req.body.groupName,
     groupMembers: req.body.groupMembers,
+    groupAvatar: req.body.groupAvatar
   });
   let str = req.headers.referer;
   let ref = str.substring(29, 53)

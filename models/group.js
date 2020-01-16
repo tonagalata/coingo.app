@@ -4,10 +4,9 @@ const Schema = mongoose.Schema;
 
 
 const groupSchema = new Schema({
-  name: { type: String},
-  payeeAvatar: { type: String },
-  payerAvatar: { type: String },
-  groupMembers: [{type: Schema.Types.ObjectId, ref: 'Member'}],
+  name: { type: String, required: true},
+  groupAvatar: { type: String },
+  groupMembers: [{type: Schema.Types.ObjectId, ref: 'Member', required: true}],
 }, {
   timestamps: true
 });

@@ -14,12 +14,13 @@ function(accessToken, refreshToken, profile, cb) {
     if (member) {
       return cb(null, member);
     } else {
+      
       // we have a new member via OAuth!
       console.log(profile)
       const newMember = new Member({
         name: profile.displayName,
         email: profile.emails,
-        // avatar: profile.photos,
+        
         facebookId: profile.id
       });
       newMember.save(function(err) {

@@ -7,11 +7,11 @@
         <div class="transactions">
           <div class="past-transactions-name">Past 4 Transactions</div>
           <div class="past-transactions">
-          <%if(!!user.transaction.payer) {%>
+          <%if(!!user.transaction) {%>
           <% for (let i = 0; i < 4; i++){%> 
             
             <%= user.name %>
-            <%= user.transaction[i].payer %>
+            <%= user.transaction %>
             <%= user.transaction[i].paymentAmount %>
 
           <div class="group-transactions">
@@ -52,7 +52,7 @@
           <%#= Object.values(member) %> 
           <%#}%>
           <%#}%>
-<% user.transaction.payer %>
+<% user.transaction%>
 
 
     <% members.map((m, idx) => m._id)%>
