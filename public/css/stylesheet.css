@@ -677,3 +677,28 @@ footer a {
   padding: 10px;
 }
 
+.trans-ava-label {
+  margin-left: 15px;
+  color: #000;
+} 
+
+td > label {
+  color: #000;
+} 
+
+.trans-ava-img {
+  margin: 0;
+  padding: 0;
+}
+
+@media only screen and (max-width: 992px){
+  .trans-ava-img {
+    display: none;
+  }
+  
+}
+
+.highlight > tbody > tr:hover {
+  background-color: rgb(185, 183, 183) !important;
+  color: #000;
+}

@@ -11,8 +11,8 @@ const transactionSchema = new Schema({
     default: 0,
     min: 100
   },
-  payee: [{type: Schema.Types.ObjectId, ref: 'Member'}],
-  payer: [{type: Schema.Types.ObjectId, ref: 'Member'}],
+  payee: {type: Schema.Types.ObjectId, ref: 'Member'},
+  payer: {type: Schema.Types.ObjectId, ref: 'Member'},
 }, {
   timestamps: true
 });

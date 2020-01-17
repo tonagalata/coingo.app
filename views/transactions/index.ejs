@@ -1,96 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>COINGO | Group Savings</title>
-  <link rel="stylesheet" href="/css/stylesheet.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="https://js.stripe.com/v3/"></script>
-  <script src="https://checkout.stripe.com/v2/checkout.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-  <script defer src="/js/main.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script defer src="/js/script.js"></script>        
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+<%- include('../partials/header') %>
 
-</head>
-<body>
-    <nav>
-      <ul>
-        <a href="/<%= user._id %>">
-        <li id="user-avatar" >
-          <img src="<%=user.avatar%>" alt="user-avatar">
-        </li>
-        </a>
-        <% if ((user.groupAdmin === true) || (user.groupAdmin)) { %>
-        <a href="/admin/<%= user._id %>">
-        <li id="admin-avatar">
-          <label for="admin-avatar">Admin Portal</label>
-          <img src="https://img.icons8.com/clouds/500/000000/employee-card.png">
-        </li>
-      </a>
-      <%}%>
-        <a href="/member">
-        <li id="all-members">
-           <label for="all-members">Members</label>
-           <img src="https://img.icons8.com/clouds/500/000000/conference-call.png"></li>
-        </a>
-        <a href="/payments">
-          <li id="make-payment">
-             <label for="make-payment">Payment</label>
-            <img src="https://img.icons8.com/cotton/64/000000/mobile-payment--v2.png"></li>
-        </a>
-        <a href="/transactions">
-        <li id="all-transactions">
-           <label for="all-transactions">Transactions</label>
-          <img src="https://img.icons8.com/officel/320/000000/ledger.png"></li>
-        </a>
-        <a href="/group">
-        <li id="all-groups">
-           <label for="all-groups">Groups</label>
-          <img src="https://img.icons8.com/bubbles/500/000000/people-group-bill--v1.png"></li>
-          </a>
-          <% if (user) { %><a href="/logout">
-        <li id="log-out">
-           <!-- <label for="log-out">Logout</label> -->
-          <img src="https://img.icons8.com/cotton/320/000000/logout-rounded.png"></li></a>
-          <% } else { %>
-            <a href="/login"><i class="material-icons left">vpn_key</i>Login</a>
-          <% } %></li>
-        </ul>
-    </nav>
     <section class="member-info">
       <div class="row edit-fields">
-        
-      <%if(user.transaction) {%>
 
-      <table class="highlight">
+        <%# user %>
+        <%# user %>
+        <%# transaction %>
+        <%#= Object.keys(mem) %>
+        <%# Object.values(transaction).forEach((tran, idx) => { %>
+          <%#= tran %>
+
+      <%if(transaction) {%>
+
+      <table class="highlight responsive-table">
         <thead>
           <tr>
-              <th>#</th>
               <th>Transaction Id</th>
-              <th>Member Payed</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Payer</th>
+              <th>Paid</th>
               <th>Amount</th>
           </tr>
         </thead>
 
         <tbody>
-          <%user.transaction.forEach((trans, idx) => {%>
+          <%transaction.forEach((trans, idx) => {%>
+            <%if(trans.payer == user.id || trans.payee.id == user.id) {%>
             <tr>
-              <td><%=idx+1%></td>
               <td><%=trans._id%></td>
-              <td><%=trans.payer%></td>
-              <td><%=trans.paymentAmount%></td>
+              <%if(trans.createdAt) {%>
+              <td><%=trans.createdAt.toLocaleDateString()%></td>
+              <td><%=trans.createdAt.toLocaleTimeString()%></td>
+              <%}%>
+              <% Object.values(mem).forEach((member, idx) => {%>
+                <%if (member.id == trans.payer) {%>
+                <td>
+                  <img class="trans-ava-img" src="<%= member.avatar %>" alt="Member avatar">
+                  <br class="trans-ava-img"/>
+                  <label><%= member.name %></label>
+                </td>
+                <%}%>
+                <%})%>
+                <td>
+                  <img class="trans-ava-img" src="<%=trans.payee.avatar%>" alt="Member avatar">
+                  <br class="trans-ava-img"/>
+                  <label class="center trans-ava-label">Me</label>
+                </td>
+                <td><%='$' + trans.paymentAmount%></td>
             </tr>
+            <%}%>
           <%});%>
         </tbody>
       </table>
@@ -105,8 +64,5 @@
         <%}%>
       </div>
     </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-</body>
-</html>
+
+    <%- include('../partials/footer') %>

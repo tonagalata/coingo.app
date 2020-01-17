@@ -63,14 +63,20 @@ function postPayment (req, res, next) {
         // Member.findById(req.user.id, function(err, members){
           Member.findById(req.params.id, {Member})
           const transaction = new Transaction({
-            stripeToken: req.body.stripeT,
-            paymentAmount: req.body.payAmount,
+            stripeToken: req.body.stripeToken,
+            paymentAmount: req.body.paymentAmount,
             payee: req.body.payee,
-            payer: req.body.payer,
+            payer: req.user,
             name: req.body.name,
           });
-         transaction.save(req.body)
-          res.redirect('members')
+         transaction.save({
+          stripeToken: req.body.stripeToken,
+          paymentAmount: req.body.paymentAmount,
+          payee: req.body.payee,
+          payer: req.user,
+          name: req.body.name
+         })
+          res.redirect('/transactions')
       })
     }
 
@@ -99,27 +105,39 @@ function postPayment (req, res, next) {
     }
 
 function paymentCharges (req, res) {
-  Member.findById(req.params.id, function(err, members){
+  let mem = {};
+  Member.find({}, function(err,members){
+    mem = members
+  })
+  Transaction.find({})
+  .populate('payer', 'payee').exec(function(err, transaction) {
+    Member.find({_id: {$in: transaction}}, Member.find({}))
   res.render('payments/show', {
-    members,
+    mem,
     user: req.user,
     avatar: req.user.avatar,
     amount: req.body.payAmount,
-    payer: req.memberName,
+    payer: req.payer,
     payee: req.user
     })
   });
 }
 
 function makePayment (req, res) {
-  Member.find({}, function(err, members){
+  let mem = {};
+  Member.find({}, function(err,members){
+    mem = members
+  })
+  Transaction.find({})
+  .populate('payer', 'payee').exec(function(err, transaction) {
+    Member.find({_id: {$in: transaction}}, Member.find({}))
   res.render('payments/index', {
-    members,
+    mem,
     user: req.user,
     avatar: req.user.avatar,
     groupNo: req.user._id,
     amount: req.body.payAmount || 10000,
-    payer: req.memberName,
+    payer: req.payer,
     payee: req.user
     })
   })

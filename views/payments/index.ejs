@@ -7,14 +7,15 @@
             <div class="input-field">
               <select class="icons" name="payee">
                 <option value="" disabled selected>Search For Members</option>
-                <%if(!!members) {%>
-                <% members.forEach((pix) => {%>
+                <%if(!!Object.values(mem)) {%>
+                <% Object.values(mem).forEach((pix) => {%>
+                  <%if(pix._id != user.id) {%>
                 <option value="<%=pix._id%>" data-icon="<%=pix.avatar%>"><%=pix.name%></option>
+                  <%}%>
                 <%})%>
-                <%}else{%>
-                  <option value="<%=user._id%>" data-icon="<%=user.avatar%>"><%=user.name%></option>
                 <%}%>
               </select>
+              <input name="payer" data-icon="<%=user.avatar%>" value="<%= user %>" hidden>
             </div>
           <input type="hidden" id="stripeToken" name="stripeToken" />
           <input type="hidden" id="stripeEmail" name="stripeEmail" />
@@ -28,7 +29,7 @@
           <button
           id="customButton"
           type="submit" 
-          data-amount="10000"
+          data-amount="1000"
           value="Pay with Card"
           data-key="pk_test_bxWBtKKtZqxBNXPxKzE8BLU8001CMawzKx"
           data-currency="usd"
@@ -47,6 +48,7 @@
               <th>#</th>
               <th>Transaction Id</th>
               <th>Member Payed</th>
+              <th>Payer</th>
               <th>Amount</th>
           </tr>
         </thead>
@@ -56,6 +58,7 @@
             <tr>
               <td><%=idx+1%></td>
               <td><%=trans._id%></td>
+              <td><%=trans.payee%></td>
               <td><%=trans.payer%></td>
               <td><%=trans.paymentAmount%></td>
             </tr>
