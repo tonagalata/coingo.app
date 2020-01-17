@@ -26,7 +26,22 @@ router.get('/member/:id/groups', membersCtrl.isLoggedIn,
 
 
 //groupsCtrl.show);
-router.get('/member/:id/groups/new', membersCtrl.isLoggedIn, groupsCtrl.newGroup)
+router.get('/member/:id/groups/new', membersCtrl.isLoggedIn,
+(req, res) => { 
+  let mem = {};
+  Member.find({}, function(err,members){mem = members})
+
+  Member.find({}, function (member){ 
+    res.render('groups/show', {
+     mem, 
+     member,
+     groups: req.body.groups,
+     groupAvatar: req.body.groupAvatar, 
+     user: req.user,
+    });
+  });
+
+})//groupsCtrl.newGroup)
 router.post('/member/:id/groups', membersCtrl.isLoggedIn, (req, res) => {
   Member.findById(req.params.id, {Member})
   const group = new Group({

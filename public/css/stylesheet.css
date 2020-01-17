@@ -618,7 +618,7 @@ section {
   margin-bottom: 30px;
 }
 
-.member-info {
+.member-info, .group-info {
   display: flex;
   flex-direction: column;
 }
@@ -701,4 +701,12 @@ td > label {
 .highlight > tbody > tr:hover {
   background-color: rgb(185, 183, 183) !important;
   color: #000;
+}
+
+.group-info {
+  height: 100vh;
+}
+
+.group-info > .add-groups {
+  margin-top: 10%;
 }

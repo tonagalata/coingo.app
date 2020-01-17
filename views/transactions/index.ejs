@@ -43,9 +43,14 @@
                 <%}%>
                 <%})%>
                 <td>
+                  
                   <img class="trans-ava-img" src="<%=trans.payee.avatar%>" alt="Member avatar">
                   <br class="trans-ava-img"/>
+                  <%if(trans.payee == user.id) {%>
                   <label class="center trans-ava-label">Me</label>
+                  <%} else {%>
+                    <label><%=trans.payee.name%></label>
+                  <%}%>
                 </td>
                 <td><%='$' + trans.paymentAmount%></td>
             </tr>

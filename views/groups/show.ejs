@@ -1,17 +1,22 @@
 <%- include('../partials/header') %>
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<%=Object.values(mem)%>
 <form action="/member/<%=user._id%>/groups" method="POST">
   <input placeholder="Group Name" type="text" name="groupName" value="<%=groups%>">
-  <!-- <input placeholder="Member Name" type="text" name="groupMembers" value="<%#=members.group%>"> -->
+  <!-- <input placeholder="Member Name" type="text" name="groupMembers" value="<%=mem.group%>"> -->
   <select class="icons" name="groupMembers">
     <option value="" disabled selected>Search For Members</option>
-    <%if(!!members) {%>
-    <% members.forEach((pix) => {%>
-    <option value="<%=pix._id%>" data-icon="<%=pix.avatar%>"><%=pix.name%></option>
-    <%})%>
-    <%}else{%>
+    <%#if(!!mem) {%>
+    <%# Object.values(mem).forEach((pix) => {%>
+    <option value="<%#=pix._id%>" data-icon="<%#=pix.avatar%>"><%#=pix.name%></option>
+    <%#})%>
+    <%#}else{%>
       <option value="<%=user._id%>" data-icon="<%=user.avatar%>"><%=user.name%></option>
-    <%}%>
+    <%#}%>
   </select>
   <select name="groupAvatar" id="avatar-picker" class="icons">
     <option data-icon="<%= groupAvatar %>" value="" disabled selected>Choose A Group Avatar</option>
@@ -25,6 +30,6 @@
 
 <div></div>
 
-<div><%= members.groupMembers %></div>
+<div><%#= mem %></div>
 
 <%- include('../partials/footer') %>

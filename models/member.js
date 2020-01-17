@@ -7,6 +7,14 @@ There is no model and no 'facts' collection
 
 const Schema = mongoose.Schema;
 
+const groupSchema = new Schema({
+  name: { type: String, required: true},
+  groupAvatar: { type: String },
+  groupMembers: [{type: String}],
+}, {
+  timestamps: true
+});
+
 const memberSchema = new Schema({
   name: String,
   email: String,
@@ -27,7 +35,7 @@ const memberSchema = new Schema({
     default: "https://img.icons8.com/bubbles/50/000000/barack-obama.png"
   },
   transaction: {type: Schema.Types.ObjectId, ref: 'Transaction'},
-  group: {type: Schema.Types.ObjectId, ref: 'Group'},
+  group: [groupSchema],
   groupAdmin: {type: Boolean, default: false},
   Admin: {type: Schema.Types.ObjectId, ref: 'GroupAdmin'},
   siteAdmin: {type: Schema.Types.ObjectId, ref: 'SiteAdmin'},

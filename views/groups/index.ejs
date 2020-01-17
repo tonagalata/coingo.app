@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-    <section class="member-info">
+    <section class="group-info">
       <div class="row edit-fields">
       <%if(group) {%>
       <table class="highlight">
@@ -46,7 +46,9 @@
         </div>
         <%}%>
       </div>
-      <h5 class="center"><a class="btn-large wave-light" href="/member/<%=user._id%>/groups/new">Add Group</a></h5>
+      <div class="add-groups">
+        <h5 class="center"><a class="btn-large wave-light" href="/member/<%=user._id%>/groups/new">Add Group</a></h5>
+      </div>
     </section>
 
     <%- include('../partials/footer') %>

@@ -44,37 +44,29 @@ function show(req, res, next) {
 }
 
 function newGroup(req, res) {
-  Group.findById(req.params.id, function(err, groups) {groups})
-  .populate('member').exec(function(err, groups) { 
-    groups
-    Member.find({},
-     function(err, members) {
-       res.render('groups/show', {
-        groups,
-        members,
-        groupAvatar: req.body.groupAvatar, 
-        user: req.user,
-       });
+  
+  
+  Member.find({}, function(err, members){
+    res.render('groups/show', {
+     members,
+     user: req.user,
+     avatar: members.avatar
+     // emojiStr
      });
-
-  }); console.log(req.body)
-  }
+  })
+     console.log(req.body)
+  }; 
       
 function create(req, res) {
   let str = req.headers.referer;
-  let ref = str.substring(29, 53)
-  Member.findById(req.params.id)
-  .populate('group').exec(function(err, members) {
-    groups: members.group
+  let ref = str.substring(29, 53);
 
-  Group.create( 
-    function(err, groups) {
-    req.body,
-    members,
-    groups,
-    res.redirect('/member/'+`${ref}`+'/groups');
-  });
-})
+  Member.find({}, function(members){members})
+    Member.group.push(req.body);
+    Member.group.save(function(err) {
+      res.redirect('/member/'+`${ref}`+'/groups');
+    });
+
 }
 
 
