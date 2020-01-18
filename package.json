@@ -25,6 +25,7 @@
     "passport-linkedin": "^1.0.0",
     "passport-linkedin-oauth2": "^2.0.0",
     "passport-twitter": "^1.0.4",
+    "serve-favicon": "^2.5.0",
     "stripe": "^7.15.0"
   }
 }

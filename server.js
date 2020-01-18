@@ -3,6 +3,7 @@ const keySecret = process.env.SECRET_KEY;
 const port = process.env.PORT
 // const favicon = require('serve-favicon')
 const express = require('express');
+var favicon = require('serve-favicon')
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const passport = require('passport');
@@ -32,7 +33,7 @@ const transactionsRoutes = require('./routes/transactions')
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'))
-// app.use(favicon("public/images/favicon.ico"));
+app.use(favicon("public/images/favicon.ico"));
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 app.use(express.json());
