@@ -25,25 +25,12 @@ module.exports = {
 };
 
 function deleteMember(req, res){
-
   Member.findByIdAndDelete(req.params.id,
   (err) => {
     if (err) return res.status(500).send(err);
     req.logout();
     res.redirect('/login');
 })
-.populate('payee').exec(function(err, transaction) {
-  Member.find({_id: {$in: transaction}})
-  res.render('members/index', {
-    user: req.user,
-    transaction,
-    members,
-// Member.find({}, function(err, members){
-//  res.render('members/index', {
-//   members,
-    user: req.user,
-    avatar: members.avatar
-  });
 }
 
 async function index(req, res, next) {
