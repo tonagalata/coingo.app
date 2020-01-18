@@ -68,10 +68,11 @@
                     <img src="https://img.icons8.com/flat_round/240/000000/arrow--v1.png">
                   </div>
                   <div class="tranactions-payee-avatar">
-                    <img src="<%=mem.avatar%>">
+                    <img src="<%=members.avatar%>">
                   </div>
+                  <%=members%>
                   <div class="messages">
-                    <div><%= mem.name %> sent <%= trans.payee.name %> 
+                    <div><%= members.name %> sent <%= trans.payee.name %> 
                       <%if(trans.createdAt) {%>
                         <br />
                         <span><%=trans.createdAt.toLocaleDateString()%></span> |  
