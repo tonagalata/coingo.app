@@ -11,7 +11,7 @@ const stripe = require("stripe")(keySecret);
 
 module.exports = {
   index,
-  delMember,
+  deleteMember,
   paymentCharges,
   makePayment,
   postPayment,
@@ -23,6 +23,15 @@ module.exports = {
   login,
   loggingOut,
 };
+
+function deleteMember(req, res){
+  Member.findByIdAndDelete(req.params.id,
+  (err) => {
+    if (err) return res.status(500).send(err);
+    req.logout();
+    res.redirect('/login');
+})
+}
 
 async function index(req, res, next) {
   let members = {};
@@ -174,12 +183,6 @@ function makePayment(req, res){
 }
 
 //Future Features
-// Deleting Users for Site Admin
-function delMember(req, res) {
-  req.user.remove(req.params.id, function(err) {
-    res.redirect('/');
-  });
-}
 
 function updateGroupMember(req, res, next) {
   Member.findById(req.user.id, function(err, members){

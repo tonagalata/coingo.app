@@ -108,6 +108,12 @@
           </div>
           <%}%>
         </div>
+        <h4 class="center">Delete Your Account</h4>
+        <div class="row edit-fields">
+          <form class="col s12 center" action="member/<%=user._id%>?_method=DELETE" method="POST">
+            <button id="delete-mem" class="delete-member red btn-large" type="submit">DELETE ACCOUNT</button>
+          </form>
+        </div>
     </section>
 
     <%- include('../partials/footer') %>

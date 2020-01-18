@@ -16,6 +16,12 @@ $(document).ready(function(){
   $('select').formSelect();
 });
 
+// $('#delete-mem').on('click', (e) => {
+//   e.preventDefault();
+//   alert('Are you sure you want to delete your account?' + '\nThis is will delete your ENTIRE Account!')
+//   .next()
+// })
+
 // $(document).ready(function() {
  
 //             $('#paymentInput').focusout((e) => {
