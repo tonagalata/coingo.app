@@ -50,53 +50,54 @@
 
       <div class="row edit-fields">
 
-      <%if(user.id) {%>
-      <div>
-      <% Object.values(members).forEach((e) => {%>
-      <%if(e.id == trans.payer) {%>
-      <%transaction.forEach((trans, idx) => {%>
-        <%if (trans.payer.name || trans.payee.name) {%>
-        <div class="row">
-          <div class="col s12">
-            <div class="pay-message"><span><%='$'+ trans.paymentAmount %></span></div>
-            <div class="card-panel blue-grey lighten-2">
-              <span class="white-text">
-                <div class="member-transactions">
-                    <%e.avatar%>
-                  <div class="tranactions-payer-avatar">
-                    <img src="<%=e.avatar%>">
-                  </div>
-                  <div class="transaction-arrow">
-                    <img src="https://img.icons8.com/flat_round/240/000000/arrow--v1.png">
-                  </div>
-                  <div class="tranactions-payee-avatar">
-                    <img src="<%=trans.payee.avatar%>">
-                  </div>
-                  <div class="messages">
-                    <div><%= e.name %> sent <%= trans.payee.name %> 
-                      <%if(trans.createdAt) {%>
-                        <br />
-                        <span><%=trans.createdAt.toLocaleDateString()%></span> |  
-                        <span><%=trans.createdAt.toLocaleTimeString()%></span>
-                        <%}%>
-                        <br />
-                      <% let trans_id = JSON.stringify(trans._id)%>
-                      <% let rel = JSON.parse(trans_id)%>
-                      <span>Transaction Id: <%= rel.substring(18, 32)%></span>
+        <%if(transaction) {%>
+        <div>
+        <%transaction.forEach((trans, idx) => {%>
+          <% Object.values(members).forEach((e) => {%>
+            <%if(e.id == trans.payer) {%>
+            <%e.avatar%>
+          <div class="row">
+            <div class="col s12">
+              <div class="pay-message"><span><%='$'+ trans.paymentAmount %></span></div>
+              <div class="card-panel blue-grey lighten-2">
+                <span class="white-text">
+                  <div class="member-transactions">
+                    <div class="tranactions-payer-avatar">
+                      <img src="<%=e.avatar%>">
+                    </div>
+           
+                    <div class="transaction-arrow">
+                      <img src="https://img.icons8.com/flat_round/240/000000/arrow--v1.png">
+                    </div>
+                    <div class="tranactions-payee-avatar">
+                      <img src="<%=trans.payee.avatar%>">
+                    </div>
+                    <div class="messages">
+                      <div><%= e.name %> sent <%= trans.payee.name %> 
+  
+                        <%if(trans.createdAt) {%>
+                          <br />
+                          <span><%=trans.createdAt.toLocaleDateString()%></span> |  
+                          <span><%=trans.createdAt.toLocaleTimeString()%></span>
+                          <%}%>
+                          <br />
+                        <% let trans_id = JSON.stringify(trans._id)%>
+                        <% let rel = JSON.parse(trans_id)%>
+                        <span>Transaction Id: <%= rel.substring(18, 32)%></span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </span>
+                </span>
+              </div>
             </div>
           </div>
+          <%}%>
+          <%})%>
+          <%})%>
+          </div>
+          <%}%>
         </div>
-        <%}%>
-        <%})%>
-        <%}%>
-        <%})%>
-        </div>
-        <%}%>
-      </div>
+
     </div>
     <div class="chat-container">
       <div class="chat-container-title">Message Chat</div>
