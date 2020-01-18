@@ -4,7 +4,7 @@ Come together with your friends and/or family to save up money towards a common 
 
 ## Getting Started
 
-Download it from the GitHub repo or visit the website here --> [CoinGo](https://rometools.github.io/rome/) 
+Download it from the GitHub repo or visit the website here --> [CoinGo](https://coingo.herokuapp.com/) 
 
 ## Screenshot and Roadmap
 

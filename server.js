@@ -36,7 +36,7 @@ const transactionsRoutes = require('./routes/transactions')
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'))
-app.use(favicon("public/images/favicon.ico"));
+// app.use(favicon("public/images/favicon.ico"));
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 app.use(express.json());
