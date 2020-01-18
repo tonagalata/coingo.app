@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-  <% if (!user.siteAdmin) { %>
+  <% if (!!user.groupAdmin) { %>
     <h1>Welcome Site Admin</h1>
     <% } else { %>
       <h1>You are not Authorized an as Site Admin</h1>
