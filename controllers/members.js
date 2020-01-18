@@ -20,7 +20,7 @@ module.exports = {
   updateGroupMember,
   getMember,
   updateMember,
-  redirectToLogIn,
+  // redirectToLogIn,
   login,
   loggingOut,
 };
@@ -52,9 +52,9 @@ function login(req, res) {
   });
 }
 
-function redirectToLogIn(req, res) {
-  res.redirect('index', {user: req.user} );
-}
+// function redirectToLogIn(req, res) {
+//   res.redirect('index', {user: req.user} );
+// }
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();

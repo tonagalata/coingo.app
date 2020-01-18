@@ -5,7 +5,7 @@ const passportFacebook = require('../config/facebook');
 const passportLinkedin = require('../config/linkedin');
 const passportGoogle = require('../config/google');
 
-router.get('/', membersCtrl.isLoggedIn, membersCtrl.redirectToLogIn);
+router.get('/', membersCtrl.isLoggedIn, membersCtrl.login);
 
 router.get('/payments', membersCtrl.isLoggedIn, membersCtrl.makePayment)
 
