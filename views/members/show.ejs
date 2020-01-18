@@ -43,13 +43,6 @@
         <% transaction %>
 
         <div class="row edit-fields">
-
-          <%# user %>
-          <%# user %>
-          <%# transaction %>
-          <%#= Object.keys(mem) %>
-          <%# Object.values(transaction).forEach((tran, idx) => { %>
-            <%#= tran %>
   
         <%if(transaction) {%>
   
@@ -67,6 +60,7 @@
   
           <tbody>
             <%transaction.forEach((trans, idx) => {%>
+              <%if(trans.payer == user.id || trans.payee.id == user.id) {%>
               <tr>
                 <td><%=trans._id%></td>
                 <%if(trans.createdAt) {%>
@@ -93,6 +87,7 @@
                   </td>
                   <td><%='$' + trans.paymentAmount%></td>
               </tr>
+              <%}%>
             <%});%>
           </tbody>
         </table>
