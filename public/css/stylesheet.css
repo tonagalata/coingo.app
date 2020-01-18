@@ -106,27 +106,30 @@ section {
 
 .main-container > div {
   overflow: scroll;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.main-container > h5 {
+  border-bottom: 2px solid rgb(139, 139, 139);
 }
 
 .chat-container {
   display: flex;
   width: 30vw;
-  height: 91vh;
-  /* border-left: 1px solid #000;
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000; */
+  height: 90vh;
 }
 
 .sidebar {
-  border-left: 1px solid #000;
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
-  height: 93vh;
+  display: flex;
+  margin-top: 7px;
+  margin-left: 1%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 90vh;
   width: 30%;
   padding: 1%;
-  /* overflow: scroll; */
+
 }
 
 .member-transactions {
@@ -142,7 +145,8 @@ section {
 }
 
 .main-container > div > .row, .main-container > div > .row > .col.s12 > .card-panel {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
+
 }
 
 .tranactions-payer-avatar {
@@ -182,26 +186,25 @@ section {
 }
 
 .chat-container {
+  border-radius: 5px;
+  margin-top: 7px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .chat-container-title {
   font-size: 1.5rem;
-  margin-top: 2%;
   text-align: center;
-  font-weight: bold;
-  border-bottom: 1px solid #000;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
   width: 95%;
-  margin-left: 2%;
-  margin-bottom: 2%;
+  margin: 2% auto;
 }
 
 .chat-messages-container {
   height: 100vw;
   width: 100%;
   overflow: scroll;
-  border-left: 1px solid #000;
 }
 
 .messages-input > div > form > input[type=text]{
@@ -238,25 +241,29 @@ section {
   margin-left: 3%;
   margin-top: 1%;
   word-wrap: normal;
-  overflow: scroll;
 }
 
 .past-transactions {
   width: 100%;
   height: 7vh;
-  margin-top: 1%;
+  margin: 5% auto;
   /* border: 2px solid #000; */
 }
 
 .past-transactions-name {
-  border-bottom: 1px solid #000;
-  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 95%;
+  margin: 2% auto;
 }
 
 .group-name {
-  border-bottom: 1px solid #000;
+  font-size: 1.5rem;
   text-align: center;
-  font-weight: bold;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 95%;
+  margin: 2% auto;
 }
 
 .group-title {
@@ -272,26 +279,23 @@ section {
 .groups-joined {
   display: flex;
   align-items: center;
-  min-height: 10vh;
+  margin: 5% auto;
 }
 
 .group-avatar {
   width: 100%;
-  height: 50px;
-  margin-top: 1%;
-  /* border: 2px solid #000; */
+  height: 60px;
+  margin-top: 2%;
   display: flex;
-  flex-direction: row;
+  flex-direction: row;border-radius: 5px;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.2), 2px 5px 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 .group-avatar > div {
-  /* border: 2px solid #000; */
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* margin-left: 2%; */
   width: 100%;
-  /* height: 7vh; */
 }
 
 .group-avatar > div > img {
@@ -333,7 +337,6 @@ section {
 
 #payment > input, #search > input{
   width: 100%;
-  margin: 1%;
   height: 25px;
 }
 
@@ -369,6 +372,7 @@ section {
 
 #payment > img, #search > img {
   height: 35px;
+  margin-top: -1%;
 }
 
 /* .form-div > input[type=text]:focus {
@@ -543,18 +547,12 @@ section {
     height: 5vh;
     margin-top: 0px;
   }
-
-  .sidebar {
-    height: 95vh;
-    border-bottom: none;
-  }
   /* .group-avatar > div {
     height: 20px;
     margin-top: 0px ;
   } */
   .group-avatar, .past-transactions {
     height: 40px;
-    margin-top: 2px;
   }
 
   .transactions{
@@ -632,6 +630,12 @@ section {
   margin-bottom: 50px !important;
 }
 
+.row.edit-fields > div.form-payment {
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2%;
+  border-radius: 8px;
+}
+
 .card-content {
   font-size: smaller !important;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
@@ -656,7 +660,7 @@ footer {
   font-size: 14px;
   text-align: center;
   z-index: 999;
-  margin-top: 100px;
+  margin-top: 30vh;
   padding: 20px;
 }
 
@@ -709,4 +713,27 @@ td > label {
 
 .group-info > .add-groups {
   margin-top: 10%;
+}
+
+.pay-message {
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 8px 1px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  width: 10%;
+  height: 70px;
+  padding: 2%;
+  align-items: center;
+  margin-left: 88%;
+  margin-bottom: -40px;
+  position: relative;
+  color: #000;
+  font-size: smaller;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.row {
+  margin-bottom: 0px !important;
 }

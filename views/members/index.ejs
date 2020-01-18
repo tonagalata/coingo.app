@@ -7,6 +7,7 @@
         <div class="transactions">
           <div class="past-transactions-name">Past 4 Transactions</div>
           <div class="past-transactions">
+            
           <%if(!!user.transaction) {%>
           <% for (let i = 0; i < 4; i++){%> 
             
@@ -46,52 +47,15 @@
     </div>
     <div class="main-container">
       <h5 class="center">All Transactions</h5>
+
+      <div class="row edit-fields">
+
+      <%if(transaction) {%>
       <div>
-        <%# for(let member of Object.entries(members)) {%>
-          <%# for (let account in member) {%>
-          <%#= Object.values(member) %> 
-          <%#}%>
-          <%#}%>
-<% user.transaction%>
-
-
-    <% members.map((m, idx) => m._id)%>
-
-    <%let Test3 = []%>
-
-    <% let avaArray = members.map((m, idx) => m.avatar).join(",")%>
- 
-    <% let userArray = members.map((m, idx) => m._id).forEach(e=>{ Test3.push(e)})%>
-    <%let res = userArray%>
-
-    <% Test3%>
-
-
-    <%# for (let i = 0; i < Test3.length; i++){%> 
-      <%#if(Test3[i] == us.payer){%>
-        <%# let userName = Test3[i]%>
-        <%# let us_member = members.find(elm => elm._id == us.payer) %>
-        <%# us_member.avatar + ' ' + us_member.name %>
-        <%#}%>
-    <%#}%>
-<%#if (userArray[userArray.indexOf(us.payer)] === us.payer ) {%>
-  <%# members.map((m, idx) => m.name) %>
-  <%#}%>
-<%#us.payer%>
-
-<%#if(us.payer === members._id) {%>
-
-        <%# user.transaction %>
-      <%if(user.transaction) {%>  
-        <% user.transaction.forEach((us, idx) => {%>
-          <%let elm_avatar, elm_name, elm_id;%>
-          <% let us_member = members.find((elm) => {if(elm._id == us.payee) {%>
-          <%elm_avatar = elm.avatar; elm_name = elm.name; elm_id = elm._id;%>
-          <%}}) %>
-        <%# us_member %>
-        <%#elm_avatar%>
+      <%transaction.forEach((trans, idx) => {%>
         <div class="row">
           <div class="col s12">
+            <div class="pay-message"><span><%='$'+ trans.paymentAmount %></span></div>
             <div class="card-panel blue-grey lighten-2">
               <span class="white-text">
                 <div class="member-transactions">
@@ -102,12 +66,19 @@
                     <img src="https://img.icons8.com/flat_round/240/000000/arrow--v1.png">
                   </div>
                   <div class="tranactions-payee-avatar">
-                    <img src="<%=elm_avatar%>">
+                    <img src="<%=trans.payee.avatar%>">
                   </div>
                   <div class="messages">
-                    <div><span><%= user.name %> sent <%= elm_name %> $<%= us.paymentAmount %> 
-                      <br />
-                      <span>Transaction Id: <%=us._id%></span>
+                    <div><%= user.name %> sent <%= trans.payee.name %> 
+                      <%if(trans.createdAt) {%>
+                        <br />
+                        <span><%=trans.createdAt.toLocaleDateString()%></span> |  
+                        <span><%=trans.createdAt.toLocaleTimeString()%></span>
+                        <%}%>
+                        <br />
+                      <% let trans_id = JSON.stringify(trans._id)%>
+                      <% let rel = JSON.parse(trans_id)%>
+                      <span>Transaction Id: <%= rel.substring(18, 32)%></span>
                     </div>
                   </div>
                 </div>
@@ -116,8 +87,8 @@
           </div>
         </div>
         <%})%>
-        <%}%>
         </div>
+        <%}%>
       </div>
     </div>
     <div class="chat-container">

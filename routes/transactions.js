@@ -1,7 +1,3 @@
-const Member = require('../models/member');
-const Group = require('../models/group');
-const Transaction = require('../models/transaction')
-
 const express = require('express')
 const router = express.Router();
 const membersCtrl = require('../controllers/members')

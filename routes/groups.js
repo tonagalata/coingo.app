@@ -1,5 +1,4 @@
 const Member = require('../models/member');
-const Group = require('../models/group');
 
 const express = require('express')
 const router = express.Router();
@@ -12,29 +11,46 @@ const membersCtrl = require('../controllers/members')
 
 router.get('/member/:id/groups', membersCtrl.isLoggedIn, 
 (req, res) => {
-  Member.findById(req.params.id)
-  Group.find({})
-  .populate('groupMembers').exec(function(err, group) {
-    Member.find({_id: {$in: group}}, Member.find({})
-      )
-    res.render('groups/index', {
-      user: req.user,
-      group,
-     }) 
-  }) 
-});
+group = Member.group
+Member.findById(req.params.id)
+Member.find({}, function (members){ 
+  res.render('groups/index', {
+   members,
+   group,
+   groups: req.body.groups,
+   groupAvatar: req.body.groupAvatar, 
+   user: req.user,
+  });
+})
+}
+)
+
+
+// (req, res) => {
+//   Member.findById(req.params.id)
+//   Group.find({})
+//   .populate('groupMembers').exec(function(err, group) {
+//     Member.find({_id: {$in: group}}, Member.find({})
+//       )
+//     res.render('groups/index', {
+//       user: req.user,
+//       group,
+//      }) 
+//   }) 
+// });
 
 
 //groupsCtrl.show);
 router.get('/member/:id/groups/new', membersCtrl.isLoggedIn,
 (req, res) => { 
-  let mem = {};
-  Member.find({}, function(err,members){mem = members})
-
-  Member.find({}, function (member){ 
+  // member = {}
+  // Member.findById(req.params.id, function(err,member){
+  //   member = member
+  // })
+  Member.find({}, function (members){ 
     res.render('groups/show', {
-     mem, 
-     member,
+    member,
+     members,
      groups: req.body.groups,
      groupAvatar: req.body.groupAvatar, 
      user: req.user,
@@ -42,16 +58,17 @@ router.get('/member/:id/groups/new', membersCtrl.isLoggedIn,
   });
 
 })//groupsCtrl.newGroup)
+
 router.post('/member/:id/groups', membersCtrl.isLoggedIn, (req, res) => {
-  Member.findById(req.params.id, {Member})
-  const group = new Group({
+  Member.findById({}, (member) => member)
+  Member.group.save({
     name: req.body.groupName,
     groupMembers: req.body.groupMembers,
     groupAvatar: req.body.groupAvatar
   });
   let str = req.headers.referer;
   let ref = str.substring(29, 53)
-  group.save().then(result => {
+    .then(result => {
     console.log(result)
     res.redirect(`/member/${ref}/groups`)
   })

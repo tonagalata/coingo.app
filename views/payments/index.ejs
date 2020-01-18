@@ -22,7 +22,7 @@
           <input type="hidden" id="amountInCents" name="amountInCents" />
           <div id="payment">
 
-            <input class="strip-input" id="amountInDollars" type="number" placeholder="Enter Amount here" name="paymentAmount" value="10000" min="1000" required>
+            <input class="strip-input" id="amountInDollars" type="number" placeholder="Enter Amount here" name="paymentAmount" value="1000" min="1000" required>
             <img src="https://img.icons8.com/officel/64/000000/card-in-use.png">
           </div>
         </form>
@@ -40,40 +40,7 @@
 
       </div>
         
-      <%if(user.transaction) {%>
 
-      <table class="highlight">
-        <thead>
-          <tr>
-              <th>#</th>
-              <th>Transaction Id</th>
-              <th>Member Payed</th>
-              <th>Payer</th>
-              <th>Amount</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <%user.transaction.forEach((trans, idx) => {%>
-            <tr>
-              <td><%=idx+1%></td>
-              <td><%=trans._id%></td>
-              <td><%=trans.payee%></td>
-              <td><%=trans.payer%></td>
-              <td><%=trans.paymentAmount%></td>
-            </tr>
-          <%});%>
-        </tbody>
-      </table>
-      <%} else {%>
-        <div class="row">
-          <div class="col s12">
-            <div>
-              <h4 class="center">No Transactions</h4>
-            </div>
-          </div>
-        </div>
-        <%}%>
     </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">

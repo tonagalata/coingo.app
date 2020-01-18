@@ -22,7 +22,29 @@ module.exports = {
   updateMember,
   redirectToLogIn,
   login,
+  loggingOut,
 };
+
+async function index(req, res, next) {
+  let members = {};
+  Member.find({}, function(err,member){
+    members = member
+  })
+  await Transaction.find({})
+  .populate('payee').exec(function(err, transaction) {
+    Member.find({_id: {$in: transaction}})
+    res.render('members/index', {
+      user: req.user,
+      transaction,
+      members,
+  // Member.find({}, function(err, members){
+  //  res.render('members/index', {
+  //   members,
+      user: req.user,
+      avatar: members.avatar
+    });
+ });
+}
 
 function login(req, res) {
   res.render('index', {
@@ -34,16 +56,17 @@ function redirectToLogIn(req, res) {
   res.redirect('index', {user: req.user} );
 }
 
-function updateGroupMember(req, res, next) {
-  Member.findById(req.user.id, function(err, members){
-
-  members.group.push(req.body)
-  members.save((err) => {
-    if(err) res.render('/group')
-  })
-  next(res.redirect(`/group/${req.params.id}`)); 
-})
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/login');
 }
+
+function loggingOut(req, res){
+  req.logout();
+  res.redirect('/login');
+}
+
+
 
 function postPayment (req, res, next) {
     let amount = (req.body.paymentAmount * 100);
@@ -80,29 +103,37 @@ function postPayment (req, res, next) {
       })
     }
 
-    function getMember(req, res){
-      Member.findById(req.params.id, function(err, member){
-        res.render('members/show', {
-        member,
+  async function getMember(req, res){
+    let mem = {};
+    Member.find({}, function(err,member){
+      mem = member
+    })
+    await Transaction.find({})
+    .populate('payee').exec(function(err, transaction) {
+      Member.find({_id: {$in: transaction}})
+      res.render('members/show', {
+        user: req.user,
+        transaction,
+        mem,
         userName: req.user.name,
         avatar: req.user.avatar,
         user: req.user,
         email: req.user.email
-        })
       })
-    }
+    })
+  }
 
 
-    function updateMember(req, res){
-      Member.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {new: true},
-        (err) => {
-            if (err) return res.status(500).send(err);
-            res.redirect(`/${req.user._id}`)
-        });
-    }
+  function updateMember(req, res){
+    Member.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {new: true},
+      (err) => {
+          if (err) return res.status(500).send(err);
+          res.redirect(`/${req.user._id}`)
+      });
+  }
 
 function paymentCharges (req, res) {
   let mem = {};
@@ -123,7 +154,7 @@ function paymentCharges (req, res) {
   });
 }
 
-function makePayment (req, res) {
+function makePayment(req, res){
   let mem = {};
   Member.find({}, function(err,members){
     mem = members
@@ -143,27 +174,21 @@ function makePayment (req, res) {
   })
 }
 
-
-function index(req, res, next) {
-
-  // let emojiStr = emoji.get('pizza')
-  Member.find({}, function(err, members){
-   res.render('members/index', {
-    members,
-    user: req.user,
-    avatar: members.avatar
-    // emojiStr
-    });
- });
-}
-
+//Future Features
+// Deleting Users for Site Admin
 function delMember(req, res) {
   req.user.remove(req.params.id, function(err) {
     res.redirect('/');
   });
 }
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/login');
+function updateGroupMember(req, res, next) {
+  Member.findById(req.user.id, function(err, members){
+
+  members.group.push(req.body)
+  members.save((err) => {
+    if(err) res.render('/group')
+  })
+  next(res.redirect(`/group/${req.params.id}`)); 
+})
 }

@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 
     <section class="member-info">
-      <h4 class="center">Update Your info</h4>
+      <h4 class="center"><%= user.name +"'s" %> Information</h4>
       <div class="row edit-fields">
         <form class="col s12" action="/<%=user._id%>?_method=PUT" method="POST">
           <div class="row">
@@ -39,39 +39,75 @@
           <button class="btn wave-light" type="submit">Submit</button>
         </form>
       </div>
-        
-      <%if(user.transaction) {%>
 
-      <table class="highlight">
-        <thead>
-          <tr>
-              <th>#</th>
-              <th>Transaction Id</th>
-              <th>Member Payed</th>
-              <th>Amount</th>
-          </tr>
-        </thead>
+        <% transaction %>
 
-        <tbody>
-          <%user.transaction.forEach((trans, idx) => {%>
+        <div class="row edit-fields">
+
+          <%# user %>
+          <%# user %>
+          <%# transaction %>
+          <%#= Object.keys(mem) %>
+          <%# Object.values(transaction).forEach((tran, idx) => { %>
+            <%#= tran %>
+  
+        <%if(transaction) {%>
+  
+        <table class="highlight responsive-table">
+          <thead>
             <tr>
-              <td><%=idx+1%></td>
-              <td><%=trans._id%></td>
-              <td><%=trans.payer%></td>
-              <td><%=trans.paymentAmount%></td>
+                <th>Transaction Id</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Payer</th>
+                <th>Paid</th>
+                <th>Amount</th>
             </tr>
-          <%});%>
-        </tbody>
-      </table>
-      <%} else {%>
-        <div class="row">
-          <div class="col s12">
-            <div>
-              <h4 class="center">No Transactions</h4>
+          </thead>
+  
+          <tbody>
+            <%transaction.forEach((trans, idx) => {%>
+              <%if(trans.payer == user.id || trans.payee.id == user.id) {%>
+              <tr>
+                <td><%=trans._id%></td>
+                <%if(trans.createdAt) {%>
+                <td><%=trans.createdAt.toLocaleDateString()%></td>
+                <td><%=trans.createdAt.toLocaleTimeString()%></td>
+                <%}%>
+                <% Object.values(mem).forEach((member, idx) => {%>
+                  <%if (member.id == trans.payer) {%>
+                  <td>
+                    <img class="" src="<%=member.avatar%>" alt="Member avatar">
+                    <br class="trans-ava-img"/>
+                    <label><%= member.name %></label>
+                  </td>
+                  <%}%>
+                  <%})%>
+                  <td>
+                    <img class="trans-ava-img" src="<%=trans.payee.avatar%>" alt="Member avatar">
+                    <br class="trans-ava-img"/>
+                    <%if(trans.payee == user.id) {%>
+                    <label class="center trans-ava-label">Me</label>
+                    <%} else {%>
+                      <label><%=trans.payee.name%></label>
+                    <%}%>
+                  </td>
+                  <td><%='$' + trans.paymentAmount%></td>
+              </tr>
+              <%}%>
+            <%});%>
+          </tbody>
+        </table>
+        <%} else {%>
+          <div class="row">
+            <div class="col s12">
+              <div>
+                <h4 class="center">No Transactions</h4>
+              </div>
             </div>
           </div>
+          <%}%>
         </div>
-        <%}%>
     </section>
 
     <%- include('../partials/footer') %>
