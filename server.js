@@ -10,7 +10,6 @@ const session = require('express-session');
 // Require the Stripe library with a test secret key.
 const stripe = require("stripe")(keySecret);
 const bodyParser = require("body-parser");
-const emoji = require('node-emoji')
 
 //Socket.io mount
 const app = express();
@@ -43,6 +42,7 @@ app.use(express.json());
 app.use(require('body-parser').urlencoded({
   extended: false
 }));
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -50,32 +50,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-//Socket.io code
-// const groups = { }
-
-// app.get('/', (req, res) => {
-//   res.render('index', { groups: groups })
-// })
-
-// app.post('/group', (req, res) => {
-//   if (groups[req.body.group] != null) {
-//     return res.redirect('/')
-//   }
-//   groups[req.body.group] = { users: {} }
-//   res.redirect(req.body.group)
-//   // Send message that new group was created
-//   io.emit('group-created', req.body.group)
-// })
-
-// app.get('/:group', (req, res) => {
-//   if (groups[req.params.group] == null) {
-//     return res.redirect('/')
-//   }
-//   res.render('group', { groupName: req.params.group })
-// })
-
-//Socket.io handlers
 
 
 app.use('/', indexRoutes);
