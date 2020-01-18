@@ -49,7 +49,6 @@ function newGroup(req, res) {
      members,
      user: req.user,
      avatar: members.avatar
-     // emojiStr
      });
   })
      console.log(req.body)
