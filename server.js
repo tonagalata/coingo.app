@@ -11,10 +11,8 @@ const session = require('express-session');
 const stripe = require("stripe")(keySecret);
 const bodyParser = require("body-parser");
 
-//Socket.io mount
 const app = express();
-// const server = require('http').Server(app)
-// const io = require('socket.io')(server)
+
 
 require('dotenv').config();
 require('./config/database')
