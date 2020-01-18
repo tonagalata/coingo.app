@@ -1,7 +1,7 @@
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 
-const favicon = require('serve-favicon')
+// const favicon = require('serve-favicon')
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
