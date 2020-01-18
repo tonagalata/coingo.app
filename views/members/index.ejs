@@ -1,0 +1,217 @@
+<%- include('../partials/header') %>
+
+    <section>
+    <div class="sidebar">
+
+      <div>
+        <div class="transactions">
+          <div class="past-transactions-name">Past 4 Transactions</div>
+          <div class="past-transactions">
+            
+          <%if(!!user.transaction) {%>
+          <% for (let i = 0; i < 4; i++){%> 
+            
+            <%= user.name %>
+            <%= user.transaction %>
+            <%= user.transaction[i].paymentAmount %>
+
+          <div class="group-transactions">
+            <div class="tranactions-payer-avatar"><img src="https://img.icons8.com/clouds/500/000000/user.png"></div>
+            <div class="transaction-arrow"><img src="https://img.icons8.com/flat_round/240/000000/arrow--v1.png"></div>
+            <div class="tranactions-payee-avatar"><img src="https://img.icons8.com/clouds/500/000000/user-female.png"></div>
+          </div>
+          <%}%>
+          <%} else {%>
+            <div>No Past Transactions</div>
+          <%}%>
+        </div>
+      </div>
+      <div class="group-name">Groups</div>
+      <div class="groups-joined">
+        <div class="groups-container">
+          <div class="group-avatar">
+            <div>
+              <img src="https://img.icons8.com/clouds/500/000000/user.png">
+              <div class="group-title">Group 1</div>
+            </div>
+          </div>
+          <div class="group-avatar">
+            <div>
+              <img src="https://img.icons8.com/clouds/500/000000/user.png">
+              <div class="group-title">Group 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="main-container">
+      <h5 class="center">All Transactions</h5>
+
+      <div class="row edit-fields">
+
+      <%if(transaction) {%>
+      <div>
+      <%transaction.forEach((trans, idx) => {%>
+        <div class="row">
+          <div class="col s12">
+            <div class="pay-message"><span><%='$'+ trans.paymentAmount %></span></div>
+            <div class="card-panel blue-grey lighten-2">
+              <span class="white-text">
+                <div class="member-transactions">
+                  <div class="tranactions-payer-avatar">
+                    <img src="<%=user.avatar%>">
+                  </div>
+                  <div class="transaction-arrow">
+                    <img src="https://img.icons8.com/flat_round/240/000000/arrow--v1.png">
+                  </div>
+                  <div class="tranactions-payee-avatar">
+                    <img src="<%=trans.payee.avatar%>">
+                  </div>
+                  <div class="messages">
+                    <div><%= user.name %> sent <%= trans.payee.name %> 
+                      <%if(trans.createdAt) {%>
+                        <br />
+                        <span><%=trans.createdAt.toLocaleDateString()%></span> |  
+                        <span><%=trans.createdAt.toLocaleTimeString()%></span>
+                        <%}%>
+                        <br />
+                      <% let trans_id = JSON.stringify(trans._id)%>
+                      <% let rel = JSON.parse(trans_id)%>
+                      <span>Transaction Id: <%= rel.substring(18, 32)%></span>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <%})%>
+        </div>
+        <%}%>
+      </div>
+    </div>
+    <div class="chat-container">
+      <div class="chat-container-title">Message Chat</div>
+      <div class="chat-messages-container">
+        
+
+
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+          </div>
+        </div>
+        
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-message-card">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="https://img.icons8.com/clouds/100/000000/businesswoman.png">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div class="chat-message-input">
+        <div class="messages-input">
+          <div>
+            <form action="">
+              <input type="text" placeholder="Enter chat messages here...">
+              <img src="https://img.icons8.com/color/240/000000/filled-sent.png">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('../partials/footer') %>

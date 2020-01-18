@@ -1,0 +1,113 @@
+<%- include('../partials/header') %>
+
+    <section class="member-info">
+      <h4 class="center"><%= user.name +"'s" %> Information</h4>
+      <div class="row edit-fields">
+        <form class="col s12" action="/<%=user._id%>?_method=PUT" method="POST">
+          <div class="row">
+            <div class="input-field col s6">
+              <input name="name" placeholder="Placeholder" id="fl_name" type="text" class="validate" value="<%=user.name%>">
+              <label for="fl_name">Name</label>
+            </div>
+            <div class="input-field col s6">
+              <select name="avatar" id="avatar-picker" class="icons">
+                <option data-icon="<%=user.avatar%>" value="" disabled selected>Choose your Avatar</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/guest-male.png" value="https://img.icons8.com/clouds/50/000000/guest-male.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/guest-male.png"') ? 'selected' : '' %>">Male 1</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/user.png" value="https://img.icons8.com/clouds/50/000000/user.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/user.png"') ? 'selected' : '' %>">User</option>
+                <option data-icon="https://img.icons8.com/bubbles/50/000000/cloud-account-login-female.png" value="https://img.icons8.com/bubbles/50/000000/cloud-account-login-female.png" <%= (user.avatar === '"https://img.icons8.com/bubbles/50/000000/cloud-account-login-female.png"') ? 'selected' : '' %>">Female 1</option>
+                <option data-icon="https://img.icons8.com/bubbles/50/000000/cloud-account-login-male.png" value="https://img.icons8.com/bubbles/50/000000/cloud-account-login-male.png" <%= (user.avatar === '"https://img.icons8.com/bubbles/50/000000/cloud-account-login-male.png"') ? 'selected' : '' %>">Male 2</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/businesswoman.png" value="https://img.icons8.com/clouds/50/000000/businesswoman.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/businesswoman.png"') ? 'selected' : '' %>">Female 2</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/nerd-hair.png" value="https://img.icons8.com/clouds/50/000000/nerd-hair.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/nerd-hair.png"') ? 'selected' : '' %>">Female 3</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/manager.png" value="https://img.icons8.com/clouds/50/000000/manager.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/manager.png"') ? 'selected' : '' %>">Male 3</option>
+                <option data-icon="https://img.icons8.com/clouds/50/000000/user-female.png" value="https://img.icons8.com/clouds/50/000000/user-female.png" <%= (user.avatar === '"https://img.icons8.com/clouds/50/000000/user-female.png"') ? 'selected' : '' %>">Female 4</option>
+                <option data-icon="https://img.icons8.com/bubbles/50/000000/barack-obama.png" value="https://img.icons8.com/bubbles/50/000000/barack-obama.png" <%= (user.avatar === '"https://img.icons8.com/bubbles/50/000000/barack-obama.png"') ? 'selected' : '' %>">Obama</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input disabled value="I am not editable" id="disabled" class="validate" type="password">
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input name="email" id="email" type="email" class="validate" value="<%= user.email %>">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <button class="btn wave-light" type="submit">Submit</button>
+        </form>
+      </div>
+
+        <% transaction %>
+
+        <div class="row edit-fields">
+
+          <%# user %>
+          <%# user %>
+          <%# transaction %>
+          <%#= Object.keys(mem) %>
+          <%# Object.values(transaction).forEach((tran, idx) => { %>
+            <%#= tran %>
+  
+        <%if(transaction) {%>
+  
+        <table class="highlight responsive-table">
+          <thead>
+            <tr>
+                <th>Transaction Id</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Payer</th>
+                <th>Paid</th>
+                <th>Amount</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <%transaction.forEach((trans, idx) => {%>
+              <%if(trans.payer == user.id || trans.payee.id == user.id) {%>
+              <tr>
+                <td><%=trans._id%></td>
+                <%if(trans.createdAt) {%>
+                <td><%=trans.createdAt.toLocaleDateString()%></td>
+                <td><%=trans.createdAt.toLocaleTimeString()%></td>
+                <%}%>
+                <% Object.values(mem).forEach((member, idx) => {%>
+                  <%if (member.id == trans.payer) {%>
+                  <td>
+                    <img class="" src="<%=member.avatar%>" alt="Member avatar">
+                    <br class="trans-ava-img"/>
+                    <label><%= member.name %></label>
+                  </td>
+                  <%}%>
+                  <%})%>
+                  <td>
+                    <img class="trans-ava-img" src="<%=trans.payee.avatar%>" alt="Member avatar">
+                    <br class="trans-ava-img"/>
+                    <%if(trans.payee == user.id) {%>
+                    <label class="center trans-ava-label">Me</label>
+                    <%} else {%>
+                      <label><%=trans.payee.name%></label>
+                    <%}%>
+                  </td>
+                  <td><%='$' + trans.paymentAmount%></td>
+              </tr>
+              <%}%>
+            <%});%>
+          </tbody>
+        </table>
+        <%} else {%>
+          <div class="row">
+            <div class="col s12">
+              <div>
+                <h4 class="center">No Transactions</h4>
+              </div>
+            </div>
+          </div>
+          <%}%>
+        </div>
+    </section>
+
+    <%- include('../partials/footer') %>

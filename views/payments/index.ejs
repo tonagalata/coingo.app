@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+
+    <section class="member-info">
+      <div class="row edit-fields">
+      <div class="col s8 center form-payment">
+        <form id="stripMyForm" class="form-div" action="/member" method="POST">
+            <div class="input-field">
+              <select class="icons" name="payee">
+                <option value="" disabled selected>Search For Members</option>
+                <%if(!!Object.values(mem)) {%>
+                <% Object.values(mem).forEach((pix) => {%>
+                  <%if(pix._id != user.id) {%>
+                <option value="<%=pix._id%>" data-icon="<%=pix.avatar%>"><%=pix.name%></option>
+                  <%}%>
+                <%})%>
+                <%}%>
+              </select>
+              <input name="payer" data-icon="<%=user.avatar%>" value="<%= user %>" hidden>
+            </div>
+          <input type="hidden" id="stripeToken" name="stripeToken" />
+          <input type="hidden" id="stripeEmail" name="stripeEmail" />
+          <input type="hidden" id="amountInCents" name="amountInCents" />
+          <div id="payment">
+
+            <input class="strip-input" id="amountInDollars" type="number" placeholder="Enter Amount here" name="paymentAmount" value="1000" min="1000" required>
+            <img src="https://img.icons8.com/officel/64/000000/card-in-use.png">
+          </div>
+        </form>
+          <button
+          id="customButton"
+          type="submit" 
+          data-amount="1000"
+          value="Pay with Card"
+          data-key="pk_test_bxWBtKKtZqxBNXPxKzE8BLU8001CMawzKx"
+          data-currency="usd"
+          data-name="Funding Group"
+          data-description="Stripe Payment for $100.00"
+          class="waves-light">SUBMIT</button>
+          
+
+      </div>
+        
+
+    </section>
+    
+    <%- include('../partials/footer') %>

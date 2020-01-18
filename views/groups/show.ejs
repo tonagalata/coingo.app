@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+<br />
+<br />
+<br />
+<br />
+<br />
+<%= members %>
+<form action="/member/<%=user._id%>/groups" method="POST">
+  <input placeholder="Group Name" type="text" name="groupName" value="<%=groups%>">
+  <!-- <input placeholder="Member Name" type="text" name="groupMembers" value="<%#=mem.group%>"> -->
+  <select class="icons" name="groupMembers">
+    <option value="" disabled selected>Search For Members</option>
+    <%members%>
+    <% members//.forEach((pix) => {%>
+      <%#if (pix._id == user.id) {%>
+    <option value="<%#=pix._id%>" data-icon="<%#=pix.avatar%>"><%#=pix.name%></option>
+      <%#}%>
+    <%#})%>
+    <%#}else{%>
+      <option value="<%=user._id%>" data-icon="<%=user.avatar%>"><%=user.name%></option>
+    <%#}%>
+  </select>
+  <select name="groupAvatar" id="avatar-picker" class="icons">
+    <option data-icon="<%= groupAvatar %>" value="" disabled selected>Choose A Group Avatar</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/crowd.png" value="https://img.icons8.com/bubbles/50/000000/crowd.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/crowd.png"') ? 'selected' : '' %>">Group 1</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/couple-shopping-bag.png" value="https://img.icons8.com/bubbles/50/000000/couple-shopping-bag.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/couple-shopping-bag.png"') ? 'selected' : '' %>">Group 2</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/family.png" value="https://img.icons8.com/bubbles/50/000000/family.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/family.png"') ? 'selected' : '' %>">Group 3</option>
+    <option data-icon="https://img.icons8.com/bubbles/50/000000/passenger-with-baggage.png" value="https://img.icons8.com/bubbles/50/000000/passenger-with-baggage.png" <%= (groupAvatar === '"https://img.icons8.com/bubbles/50/000000/passenger-with-baggage.png"') ? 'selected' : '' %>">Group 4</option>
+  </select>
+  <button class="btn wave-light" type="submit">Submit</button>
+</form>
+
+<div></div>
+
+<div><%#= mem %></div>
+
+<%- include('../partials/footer') %>

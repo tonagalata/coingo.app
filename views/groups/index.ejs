@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+
+    <section class="group-info">
+      <div class="row edit-fields">
+      <%if(group) {%>
+      <table class="highlight">
+        <thead>
+          <tr>
+              <th>#</th>
+              <th>Group Avatar</th>
+              <th>Group Id</th>
+              <th>Group Name</th>
+              <th>Members</th>
+              <th>Join</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% user %>
+            <% Object.values(group).forEach((grp, idx) => { %>
+              <%grp%>
+              <tr>
+                <td><%= idx+1 %></td>
+                <td><img src="<%= grp.groupAvatar %>" alt="Group avatar"></td>
+                <td><% let rel = JSON.stringify(grp._id);  %>
+                <%= JSON.parse(rel).substring(17, 24) %></td>
+                <td><%= grp.name %></td>
+                <% let grpVlu = Object.entries(grp.groupMembers) %>
+                <% grp.groupMembers.forEach((gg, idx) => {%> 
+                <td><img src="<%= gg.avatar %>" alt="Group member avatar">
+                  <br />
+                <label><%= gg.name %></label>
+              </td>
+              </tr>
+              <%}) %>
+              <% }) %>
+        </tbody>
+      </table>
+      <%} else {%>
+        <div class="row">
+          <div class="col s12">
+            <div>
+              <%=user%>
+              <h4 class="center">No Groups</h4>
+            </div>
+          </div>
+        </div>
+        <%}%>
+      </div>
+      <div class="add-groups">
+        <h5 class="center"><a class="btn-large wave-light" href="/member/<%=user._id%>/groups/new">Add Group</a></h5>
+      </div>
+    </section>
+
+    <%- include('../partials/footer') %>

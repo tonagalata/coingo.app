@@ -6,11 +6,15 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <script defer src="/js/script.js"></script>
-	<title>Coingo | Login</title>
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ 		<script defer src="/js/main.js"></script>
+	<title>Coingo</title>
 </head>
 <body>
+	<section>
   <!-- Logo -->
 	<div class="logo-container">
 		<h5 class="logo-name">COING</h5>
@@ -19,34 +23,34 @@
   <!-- Register Form -->
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#">
-			<h1>Create Account</h1>
+		<form action="/members" method="GET">
+			<h4>Create Account</h4>
 			<div class="social-container">
-				<a href="#" class="social"><i class="lab la-facebook"></i></a>
-				<a href="#" class="social"><i class="la la-google-plus"></i></a>
-				<a href="#" class="social"><i class="la la-linkedin"></i></a>
+				<a href="/auth/facebook" class="social"><i class="lab la-facebook"></i></a>
+				<a href="/auth/google" class="social"><i class="la la-google"></i></a>
+				<a href="/auth/linkedin" class="social"><i class="la la-linkedin"></i></a>
 			</div>
-			<span>or use your email for registration</span>
+			<!-- <span>or use your email for registration</span>
 			<input type="text" placeholder="Name" />
 			<input type="email" placeholder="Email" />
 			<input type="password" placeholder="Password" />
-			<button>Sign Up</button>
+			<button>Sign Up</button> -->
 		</form>
   </div>
     <!-- Login Form -->
 	<div class="form-container sign-in-container">
-		<form action="#">
-			<h1>Sign in</h1>
+		<form action="/members" method="GET">
+			<h4>Sign in</h4>
 			<div class="social-container">
-				<a href="#" class="social"><i class="lab la-facebook"></i></a>
-				<a href="#" class="social"><i class="la la-google-plus"></i></a>
-				<a href="#" class="social"><i class="la la-linkedin"></i></a>
+				<a href="/auth/facebook" class="social"><i class="lab la-facebook"></i></a>
+				<a href="/auth/google" class="social"><i class="la la-google"></i></a>
+				<a href="/auth/linkedin" class="social"><i class="la la-linkedin"></i></a>
 			</div>
-			<span>or use your account</span>
+			<!-- <span>or use your account</span>
 			<input type="email" placeholder="Email" />
 			<input type="password" placeholder="Password" />
 			<a href="#">Forgot your password?</a>
-			<button>Sign In</button>
+			<button>Sign In</button> -->
 		</form>
   </div>
     <!-- Registration Text -->
@@ -66,9 +70,6 @@
 		</div>
 	</div>
 </div>
+</section>
 
-<footer>
-
-</footer>
-</body>
-</html>
+<%- include('partials/footer') %>

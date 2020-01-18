@@ -1,0 +1,739 @@
+* {
+  /* height & width now includes border & padding */
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica;
+}
+
+nav {
+  background: none !important;
+  width: 100%;
+  margin-left: 0px;
+  overflow: hidden;
+}
+
+nav > ul{
+  display: flex;
+  flex-direction: row;
+  height: 8vh;
+  /* background-color: #fff; */
+  align-items: center;
+  padding: 0;
+  height: 64px;
+  width: 100%;
+  /* border-bottom: 1px solid #000; */
+}
+
+nav > ul > a{
+  
+}
+
+nav > ul > a:first-child{
+  margin-right: auto;
+  /* background-color: #fff; */
+  height: 64px;
+  width: 6rem;
+
+}
+
+nav > ul > a:nth-child(n) {
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+
+
+nav > ul > a:last-child {
+  align-items: center;
+  height: 64px;
+  display: flex;
+}
+
+
+nav > ul > a:hover{
+  opacity: .8;
+  cursor: pointer;
+  background-color: rgb(97, 97, 95);
+}
+
+#all-transactions, #make-payment {
+  display: flex;
+  height: 35px;
+}
+
+#all-transactions > img, #make-payment > img {
+  align-items: center;
+  height: 35px;
+}
+
+nav > ul > a > li {
+  font-size: 16px;
+  color: #fff;
+  height: 8vh;
+  /* margin: 10px; */
+  padding-left: 1% !important;
+  padding-right: 1% !important; 
+  /* padding-bottom: 2%;*/
+  padding-top: .5% !important;
+}
+
+nav > ul > a > li > img {
+  height: 50px;
+  display: flex;
+}
+
+/* nav > ul > a > li:first-child {
+  margin-right: auto;
+  margin-left: 0;
+} */
+
+section {
+  display: flex !important;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  height: 93vh;
+}
+
+.main-container > div {
+  overflow: scroll;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.main-container > h5 {
+  border-bottom: 2px solid rgb(139, 139, 139);
+}
+
+.chat-container {
+  display: flex;
+  width: 30vw;
+  height: 90vh;
+}
+
+.sidebar {
+  display: flex;
+  margin-top: 7px;
+  margin-left: 1%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 90vh;
+  width: 30%;
+  padding: 1%;
+
+}
+
+.member-transactions {
+  display: flex;
+  /* margin: 5px 5px; */
+  /* margin-top: 2%; */
+  line-height: normal;
+  margin-left: 5%;
+  /* border: 2px solid #000; */
+  width: 90%;
+  height: 70px;
+  align-items: center;
+}
+
+.main-container > div > .row, .main-container > div > .row > .col.s12 > .card-panel {
+  margin-bottom: 0 !important;
+
+}
+
+.tranactions-payer-avatar {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tranactions-payer-avatar > img {
+  height: 60px;
+}
+
+.transaction-arrow {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+.transaction-arrow > img {
+  height: 30px;
+  align-items: center;
+}
+
+.tranactions-payee-avatar {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tranactions-payee-avatar > img {
+  height: 60px;
+}
+
+.chat-container {
+  border-radius: 5px;
+  margin-top: 7px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.chat-container-title {
+  font-size: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 95%;
+  margin: 2% auto;
+}
+
+.chat-messages-container {
+  height: 100vw;
+  width: 100%;
+  overflow: scroll;
+}
+
+.messages-input > div > form > input[type=text]{
+  height: 2.2rem;
+  padding-right: 30px;
+  padding-left: 5px;
+  font-size: larger;
+  padding-bottom: 1%;
+}
+
+.messages-input > div > form {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2%;
+  flex-direction: row;
+  margin-left: 2%;
+  width: 100%;
+}
+
+.messages-input > div > form > img {
+  height: 30px;
+  margin-right: 5%;
+  margin-left: -7%;
+  margin-top: 1%;
+}
+
+.messages {
+  width: 100%;
+  height: 70px;
+  /* border: 2px solid #000; */
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2%;
+  margin-left: 3%;
+  margin-top: 1%;
+  word-wrap: normal;
+}
+
+.past-transactions {
+  width: 100%;
+  height: 7vh;
+  margin: 5% auto;
+  /* border: 2px solid #000; */
+}
+
+.past-transactions-name {
+  font-size: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 95%;
+  margin: 2% auto;
+}
+
+.group-name {
+  font-size: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 95%;
+  margin: 2% auto;
+}
+
+.group-title {
+  width: 200px;
+  margin-left: 5%;
+}
+
+.group-transactions {
+  display: flex;
+  align-items: center;
+}
+
+.groups-joined {
+  display: flex;
+  align-items: center;
+  margin: 5% auto;
+}
+
+.group-avatar {
+  width: 100%;
+  height: 60px;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;border-radius: 5px;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.2), 2px 5px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
+.group-avatar > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.group-avatar > div > img {
+  height: 70px;
+}
+
+.chat-messages-container {
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.payer-chat-messages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* padding: 2%; */
+}
+
+.payee-chat-messages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2%;
+}
+
+.messages-in-chat {
+  padding: 2%;
+  font-size: smaller;
+}
+
+.payer-chat-messages > img {
+  height: 50px;
+}
+
+.payee-chat-messages > img{
+  height: 50px;
+  justify-content: flex-end;
+}
+
+#payment > input, #search > input{
+  width: 100%;
+  height: 25px;
+}
+
+.form-div > button {
+  width: 100%;
+  margin: 1%;
+  height: 35px;
+}
+
+#payment > input[type=text], #search > input[type=text] {
+  padding-top: 5px;
+  padding-bottom: 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: transparent;
+  outline: none;
+  font-size: 14px;
+  background-repeat: no-repeat;
+}
+
+#payment, #search {
+  display: flex;
+  background: #fff;
+  height: 40px;
+  padding-right: 2%;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#payment {
+  padding-right: 0 !important;
+}
+
+#payment > img, #search > img {
+  height: 35px;
+  margin-top: -1%;
+}
+
+/* .form-div > input[type=text]:focus {
+  border-bottom: 3px solid rgb(126, 214, 248);
+} */
+
+.form-div > button {
+  background-color: #4db6ac;
+  color: #fff;
+  font-weight: bold;
+  font-size: larger;
+  margin-left: -1px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.form-div > button {
+  display: block;
+}
+
+.form-div > button:hover {
+  box-shadow: rgba(40, 157, 161, .9);
+}
+
+#admin-avatar > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 23px;
+  font-weight: bold;
+  margin-left: -7px;
+}
+
+#all-transactions > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 23px;
+  font-weight: bold;
+  margin-left: -11px;
+}
+
+#log-out > a > img  {
+  height: 45px;
+}
+
+#all-members > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 24px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+#all-groups > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 24px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+#make-payment > label {
+  color: #000;
+  font-size: 10px;
+  position: absolute;
+  top: 24px;
+  font-weight: bold;
+  margin-left: -5px;
+}
+
+.transactions {
+  margin-top: 25px;
+  height: 40vh;
+  text-align: center;
+  /* text-decoration: underline; */
+}
+
+.group-transactions > .tranactions-payer-avatar > img, .group-transactions > .tranactions-payee-avatar > img, .group-transactions > .transaction-arrow > img{
+  margin-left: 100%;
+  /* text-decoration: underline; */
+}
+
+.groups {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.select-avatar {
+  margin-top: 1px;
+  height: 6vh;
+  text-align: center;
+  margin-bottom: 1%;
+}
+
+.select-avatar > form {
+  display: flex;
+  flex-direction: row;
+}
+
+.select-avatar > form > select {
+  width: 90%;
+}
+
+#customButton {
+  width: 100%;
+  background-color: #4db6ac;
+  color: #fff;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .select-avatar > select {
+    width: 187px;
+    background-color: rgb(177, 248, 177);
+    height: 25px;
+    border-radius: 0%;
+  }
+  .form-div > button {
+    width: 202px;
+  }
+
+  #all-transactions {
+    width: 100%;
+  }
+
+  #admin-avatar > label, #all-transactions > label {
+    display: none;
+  }
+
+  #all-transactions > img {
+    margin-top: 2px;
+    margin-bottom: 0px;
+  }
+  
+  #all-groups > label, #log-out > label, #all-members > label, #make-payment > label {
+    display: none;
+  }
+  
+  #payment, #search {
+    margin-top: 10px;
+    width: 100% !important;
+  }
+  
+  .form-div > button {
+    width: 95% !important;
+  }
+  nav > ul > a > li > img{
+    height: 45px;
+  }
+
+  nav > ul > a{
+    margin-top: 0 !important;
+    height: 64px !important;
+  }
+
+  nav > ul > a > li > img {
+    height: 45px;
+  }
+
+  nav > ul > a > li {
+    font-size: 14px;
+    height: 50px;
+    margin-top: 0px !important;
+  }
+
+  nav {
+    height: 5vh;
+    margin-top: 0px;
+  }
+  /* .group-avatar > div {
+    height: 20px;
+    margin-top: 0px ;
+  } */
+  .group-avatar, .past-transactions {
+    height: 40px;
+  }
+
+  .transactions{
+    height: 35vh;
+  }
+
+  .select-avatar {
+    height: 10vh;
+  }
+
+  .past-transactions > img, .group-avatar > div > img {
+    height: 50px;
+  }
+  .groups-container{
+    height: 100px;
+  }
+  .past-transactions {
+    margin-bottom: 5px;
+  }
+
+  .chat-window {
+    border: 2px solid #000;
+    height: 94vh;
+    width: 60vw;
+    background-color: #fff;
+    bottom: 0;
+    right: 0;
+  }
+
+  .main-container {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+  .messages {
+    display: none; 
+   }
+   .chat-container {
+    width: 60vw;
+  }
+  .messages-input > div > form > input[type=text]{
+    height: 2.2rem;
+    padding-bottom: 2%;
+  }
+
+
+}
+
+.messages > div {
+  align-items: center;
+}
+
+.edit-fields {
+  margin: 30px auto;
+  width: 100%;
+}
+
+.edit-fields > form {
+  margin-bottom: 30px;
+}
+
+.member-info, .group-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-image {
+  height: 20px;
+}
+
+.form-payment {
+  margin-left: 15% !important;
+  margin-bottom: 50px !important;
+}
+
+.row.edit-fields > div.form-payment {
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2%;
+  border-radius: 8px;
+}
+
+.card-content {
+  font-size: smaller !important;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+}
+
+.card, .horizontal {
+  margin-bottom: 5px !important;
+}
+
+.card-image > img {
+  max-height: 70px !important;
+}
+
+.chat-message-card {
+  margin: .25rem !important;
+}
+
+footer {
+  margin: 0;
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  z-index: 999;
+  margin-top: 50vh;
+  padding: 20px;
+}
+
+footer p {
+  margin: 10px 0 0 0;
+}
+
+footer i {
+  color: red;
+}
+
+footer a {
+  color: #3c97bf;
+  text-decoration: none;
+}
+
+.list-transactions {
+  padding: 10px;
+}
+
+.trans-ava-label {
+  margin-left: 15px;
+  color: #000;
+} 
+
+td > label {
+  color: #000;
+} 
+
+.trans-ava-img {
+  margin: 0;
+  padding: 0;
+}
+
+@media only screen and (max-width: 992px){
+  .trans-ava-img {
+    display: none;
+  }
+  
+}
+
+.highlight > tbody > tr:hover {
+  background-color: rgb(185, 183, 183) !important;
+  color: #000;
+}
+
+.group-info {
+  height: 100vh;
+}
+
+.group-info > .add-groups {
+  margin-top: 10%;
+}
+
+.pay-message {
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 8px 1px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  width: 10%;
+  height: 70px;
+  padding: 2%;
+  align-items: center;
+  margin-left: 88%;
+  margin-bottom: -40px;
+  position: relative;
+  color: #000;
+  font-size: smaller;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.row {
+  margin-bottom: 0px !important;
+}
