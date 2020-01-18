@@ -52,8 +52,9 @@
 
       <%if(user.id) {%>
       <div>
+      <% Object.values(members).forEach((e) => {%>
+      <%if(e.id == trans.payer) {%>
       <%transaction.forEach((trans, idx) => {%>
-        <%= trans %>
         <%if (trans.payer.name || trans.payee.name) {%>
         <div class="row">
           <div class="col s12">
@@ -61,8 +62,6 @@
             <div class="card-panel blue-grey lighten-2">
               <span class="white-text">
                 <div class="member-transactions">
-                  <% Object.values(members).forEach((e) => {%>
-                    <%if(e.id == trans.payer) {%>
                     <%e.avatar%>
                   <div class="tranactions-payer-avatar">
                     <img src="<%=e.avatar%>">
@@ -75,8 +74,6 @@
                   </div>
                   <div class="messages">
                     <div><%= e.name %> sent <%= trans.payee.name %> 
-                  <%}%>
-                  <%})%>
                       <%if(trans.createdAt) {%>
                         <br />
                         <span><%=trans.createdAt.toLocaleDateString()%></span> |  
@@ -93,6 +90,8 @@
             </div>
           </div>
         </div>
+        <%}%>
+        <%})%>
         <%}%>
         <%})%>
         </div>
