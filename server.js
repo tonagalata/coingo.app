@@ -1,6 +1,6 @@
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
-
+const port = process.env.PORT
 // const favicon = require('serve-favicon')
 const express = require('express');
 const morgan = require('morgan');
@@ -19,7 +19,6 @@ require('./config/database')
 require('./config/google')
 require('./config/facebook')
 require('./config/linkedin')
-const port = process.env.LISTENING_PORT
 
 
 
