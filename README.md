@@ -9,7 +9,7 @@ Download it from the GitHub repo or visit the website here --> [CoinGo](https://
 ## Screenshot and Roadmap
 
 ![alt text](http://url/to/img.png)
-![alt text](https://raw.githubusercontent.com/tonagalata/coingo/development/images/screenshots/Screen Shot1.png)
+![alt text](https://github.com/tonagalata/coingo.app/blob/development/public/images/screenshots/Screen%20Shot1.png)
 
 
 ## Built With
