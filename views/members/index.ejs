@@ -53,7 +53,7 @@
       <%if(user.id) {%>
       <div>
       <%transaction.forEach((trans, idx) => {%>
-        <%if (trans.avatar) {%>
+        <%if (trans.payer || trans.payee) {%>
         <div class="row">
           <div class="col s12">
             <div class="pay-message"><span><%='$'+ trans.paymentAmount %></span></div>
