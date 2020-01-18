@@ -53,6 +53,7 @@
       <%if(user.id) {%>
       <div>
       <%transaction.forEach((trans, idx) => {%>
+        <%if (trans.avatar) {%>
         <div class="row">
           <div class="col s12">
             <div class="pay-message"><span><%='$'+ trans.paymentAmount %></span></div>
@@ -69,7 +70,7 @@
                     <img src="<%=trans.payee.avatar%>">
                   </div>
                   <div class="messages">
-                    <div><%= user.name %> sent <%= trans.payee.name %> 
+                    <div><%= trans.payer.name %> sent <%= trans.payee.name %> 
                       <%if(trans.createdAt) {%>
                         <br />
                         <span><%=trans.createdAt.toLocaleDateString()%></span> |  
@@ -86,6 +87,7 @@
             </div>
           </div>
         </div>
+        <%}%>
         <%})%>
         </div>
         <%}%>
