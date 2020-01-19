@@ -495,6 +495,7 @@ section {
     height: 25px;
     border-radius: 0%;
   }
+
   .form-div > button {
     width: 202px;
   }
@@ -575,31 +576,21 @@ section {
 
   .chat-window {
     border: 2px solid #000;
-    height: 94vh;
-    width: 60vw;
+    height: 100vh;
+    width: 98%;
     background-color: #fff;
     bottom: 0;
     right: 0;
   }
 
   .main-container {
-    display: none;
+    width: 96%;
+    margin-left: 1%;
   }
 
-}
-
-@media only screen and (max-width: 800px) {
-  .messages {
-    display: none; 
-   }
-   .chat-container {
-    width: 60vw;
+  .pay-message {
+    margin-left: 80% !important;
   }
-  .messages-input > div > form > input[type=text]{
-    height: 2.2rem;
-    padding-bottom: 2%;
-  }
-
 
 }
 
@@ -660,7 +651,7 @@ footer {
   font-size: 14px;
   text-align: center;
   z-index: 999;
-  margin-top: 100vh;
+  margin-bottom: 0px;
   padding: 20px;
 }
 
@@ -736,4 +727,55 @@ td > label {
 
 .row {
   margin-bottom: 0px !important;
+}
+
+.delete-member:hover {
+  border: 2px solid red !important;
+  color: #000;
+  background-color: #fff !important;
+}
+
+.group-member-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar {
+  width: 98%;
+}
+
+.sidebar > div {
+  width: 100%;
+}
+
+.groups-container {
+  width: 99%;
+}
+
+.main-container {
+  width: 99%;
+}
+
+.pay-message {
+  width: 5rem;
+}
+
+.main-container > h5 {
+    border-bottom: none;
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 8px 1px rgba(0, 0, 0, 0.3);
+    width: 88%;
+    margin: 50px auto;
+    padding: 2%;
+    border-radius: 5px;
+}
+
+.chat-container {
+  width: 98%;
+  margin-top: 15px;
+  margin-left: 1%;
+}
+
+.chat-container-title {
+  padding: 2%;
+  margin: 10px auto;
 }
