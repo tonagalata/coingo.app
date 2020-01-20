@@ -216,11 +216,11 @@ form > .input-field > input[type=text]{
   margin-left: 1%;
 }
 
-.input-field > label {
+.messages-input > form > .row > .input-field > label {
   margin-top: 1.5rem;
 }
 
-.input-field {
+.messages-input > form > .row > .input-field {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
