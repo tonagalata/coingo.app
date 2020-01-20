@@ -798,6 +798,6 @@ section {
   margin-bottom: 2%;
 }
 
-.member-info-payments {
+.member-info-payments, .member-info-transaction {
   height: 100vh !important;
 }
