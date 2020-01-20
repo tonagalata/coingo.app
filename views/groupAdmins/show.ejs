@@ -1,9 +1,10 @@
 <%- include('../partials/header') %>
-
-  <% if (groupAdmin.name === true) { %>
+  <section>
+    <% if (groupAdmin.name === true) { %>
     <h1>Welcome Group Admin</h1>
     <% } else { %>
         <h1>You are not Authorized as Group Administrator</h1>
     <% } %>
+  </section>
    
 <%- include('../partials/footer') %>
